@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart'; // ✅ untuk TapGestureRecognizer
 import '../theme/app_colors.dart';
 import '../theme/text_styles.dart';
 import 'widgets/onboarding_content.dart';
@@ -169,12 +170,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Text(
-                      "Sudah punya akun? Masuk",
-                      style: AppTextStyles.login,
+                  Text.rich(
+                    TextSpan(
+                      text: "Sudah punya akun? ",
+                      style: AppTextStyles.login, // abu-abu
+                      children: [
+                        TextSpan(
+                          text: "Masuk",
+                          style: AppTextStyles.login.copyWith(
+                            color: AppColors.primary, // biru
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(context, '/login');
+                            },
+                        ),
+                      ],
                     ),
+                    textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 14),
                 ],
