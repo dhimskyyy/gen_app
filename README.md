@@ -14,3 +14,18 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+🚀 Git Workflow – Flutter Project (Kolaborasi)
+🔄 1. Update dari Remote (Wajib sebelum mulai coding)
+    - git checkout develop
+    - git pull origin develop
+
+
+💻 2. Kerjakan Fitur / Bug Fix
+Edit kode kamu, lalu commit:
+    - git add .
+    - git commit -m "Deskripsi perubahan / pesan commit"
+
+🚀 3. Push Branch ke GitHub
+    - git push -u origin develop
