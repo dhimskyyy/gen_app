@@ -66,7 +66,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 padding: const EdgeInsets.only(right: 16),
                 child: TextButton(
                   onPressed: () =>
-                      Navigator.pushReplacementNamed(context, '/home'),
+                      Navigator.pushReplacementNamed(context, '/permission'),
                   child: Text("Lewati", style: AppTextStyles.skip),
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data/google_accounts.dart';
+import '../../../home_screen.dart';
 
 class GoogleAccountDialog extends StatelessWidget {
   const GoogleAccountDialog({super.key});
@@ -28,20 +29,32 @@ class GoogleAccountDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 14),
-            ...googleAccounts.map((acc) => ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: acc['photo'] != null
-                  ? CircleAvatar(
-                    backgroundImage: AssetImage(acc['photo']!),
-                  )
-                  : CircleAvatar(
-                    backgroundColor: Colors.deepPurple.shade50,
-                    child: Text(acc['initials']!, style: const TextStyle(color: Colors.black)),
-                  ),
-                  title: Text(acc['name']!, style: const TextStyle(fontSize: 14)),
-                  subtitle: Text(acc['email']!, style: const TextStyle(fontSize: 12)),
-                  onTap: () => Navigator.pop(context),
-                )),
+            ...googleAccounts.map(
+              (acc) => ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: acc['photo'] != null
+                    ? CircleAvatar(backgroundImage: AssetImage(acc['photo']!))
+                    : CircleAvatar(
+                        backgroundColor: Colors.deepPurple.shade50,
+                        child: Text(
+                          acc['initials']!,
+                          style: const TextStyle(color: Colors.black),
+                        ),
+                      ),
+                title: Text(acc['name']!, style: const TextStyle(fontSize: 14)),
+                subtitle: Text(
+                  acc['email']!,
+                  style: const TextStyle(fontSize: 12),
+                ),
+                onTap: () {
+  Navigator.of(context).pushAndRemoveUntil(
+    MaterialPageRoute(builder: (context) => const HomeScreen()),
+    (Route<dynamic> route) => false,
+  );
+}
+
+              ),
+            ),
             const Divider(height: 22),
             ListTile(
               contentPadding: EdgeInsets.zero,
