@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/text_styles.dart';
 import 'widgets/onboarding_content.dart';
-import 'widgets/modals/google_account_dialog.dart';
+import 'widgets/dialog/google_account_dialog.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
