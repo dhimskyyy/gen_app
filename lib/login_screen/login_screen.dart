@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // penting untuk keyboard
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.only(
@@ -74,8 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   suffixIcon: IconButton(
                     icon: Image.asset(
                       _obscureText
-                          ? 'assets/icons/eye.png'
-                          : 'assets/icons/bulumata.png',
+                          ? 'assets/icons/eye_icon.png'
+                          : 'assets/icons/eyelashes_icon.png',
                       width: 24,
                       height: 24,
                     ),
