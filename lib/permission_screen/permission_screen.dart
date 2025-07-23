@@ -45,17 +45,6 @@ class _PermissionScreenState extends State<PermissionScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: TextButton(
-                  onPressed: () =>
-                      Navigator.pushReplacementNamed(context, '/home'),
-                  child: Text("Lewati", style: AppTextStyles.skip),
-                ),
-              ),
-            ),
             Expanded(
               child: PageView.builder(
                 controller: _controller,
@@ -119,10 +108,14 @@ class _PermissionScreenState extends State<PermissionScreen> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  Text.rich(
-                    TextSpan(text: "Lewati untuk sekarang"),
-                    style: AppTextStyles.small,
-                    textAlign: TextAlign.center,
+                  GestureDetector(
+                    onTap: () =>
+                      Navigator.pushReplacementNamed(context, '/home'),
+                    child: Text.rich(
+                      TextSpan(text: "Lewati untuk sekarang"),
+                      style: AppTextStyles.small,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   const SizedBox(height: 14),
                 ],

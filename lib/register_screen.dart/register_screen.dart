@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
+import '../theme/text_styles.dart';
+import 'package:flutter/gestures.dart';
+import '../splash_screen/widgets/dialog/google_account_dialog.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -8,72 +12,101 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final emailController = TextEditingController();
+  final _emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  bool isPasswordVisible = false;
-  bool isConfirmPasswordVisible = false;
+  bool isPasswordVisible = true;
+  bool isConfirmPasswordVisible = true;
 
   @override
   Widget build(BuildContext context) {
-    final isEmailFilled = emailController.text.isNotEmpty;
     final isPasswordFilled = passwordController.text.isNotEmpty;
     final isConfirmFilled = confirmPasswordController.text.isNotEmpty;
 
-    final isFormValid =
-        isEmailFilled &&
-        isPasswordFilled &&
-        isConfirmFilled &&
-        passwordController.text == confirmPasswordController.text;
-
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.only(
+            left: 24,
+            right: 24,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Back Button
+              const SizedBox(height: 12),
               IconButton(
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                onPressed: () =>
+                    Navigator.pushReplacementNamed(context, '/onboarding'),
               ),
-              const SizedBox(height: 8),
-
-              // Title
               const Text(
-                "Buat Akun",
+                'Buat Akun',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 4),
-              const Text(
-                "Sudah punya akun? Masuk",
-                style: TextStyle(color: Colors.grey),
+              RichText(
+                text: TextSpan(
+                  text: 'Sudah punya akun? ',
+                  style: const TextStyle(
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: 'Masuk',
+                      style: TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.pushReplacementNamed(context, '/login');
+                        },
+                    ),
+                  ],
+                ),
               ),
 
               const SizedBox(height: 30),
 
               // Email Field
               TextField(
-                controller: emailController,
+                controller: _emailController,
                 onChanged: (_) => setState(() {}),
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  labelText: "Alamat E-mail",
-                  suffixIcon: isEmailFilled
+                  hintText: "Alamat E-mail",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: AppColors.lightGrey),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: AppColors.lightGrey),
+                  ),
+                  suffixIcon: _emailController.text.isNotEmpty
                       ? IconButton(
-                          icon: const Icon(Icons.clear),
+                          icon: Image.asset(
+                            'assets/icons/clear_icon.png',
+                            width: 16,
+                            height: 16,
+                          ),
                           onPressed: () {
-                            emailController.clear();
-                            setState(() {});
+                            setState(() {
+                              _emailController.clear();
+                            });
                           },
                         )
                       : null,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 16,
                   ),
                 ),
               ),
@@ -86,13 +119,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 onChanged: (_) => setState(() {}),
                 obscureText: !isPasswordVisible,
                 decoration: InputDecoration(
-                  labelText: "Kata Sandi",
+                  hintText: "Kata Sandi",
                   suffixIcon: isPasswordFilled
                       ? IconButton(
-                          icon: Icon(
+                          icon: Image.asset(
                             isPasswordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                                ? 'assets/icons/eyelashes_icon.png'
+                                : 'assets/icons/eye_icon.png',
+                            width: 18,
+                            height: 18,
                           ),
                           onPressed: () {
                             setState(() {
@@ -102,7 +137,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         )
                       : null,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: AppColors.lightGrey),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: AppColors.lightGrey),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 16,
                   ),
                 ),
               ),
@@ -115,13 +158,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 onChanged: (_) => setState(() {}),
                 obscureText: !isConfirmPasswordVisible,
                 decoration: InputDecoration(
-                  labelText: "Konfirmasi Kata Sandi",
+                  hintText: "Konfirmasi Kata Sandi",
                   suffixIcon: isConfirmFilled
                       ? IconButton(
-                          icon: Icon(
+                          icon: Image.asset(
                             isConfirmPasswordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                                ? 'assets/icons/eyelashes_icon.png'
+                                : 'assets/icons/eye_icon.png',
+                            width: 18,
+                            height: 18,
                           ),
                           onPressed: () {
                             setState(() {
@@ -132,7 +177,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         )
                       : null,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: AppColors.lightGrey),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: AppColors.lightGrey),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 16,
                   ),
                 ),
               ),
@@ -140,24 +193,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(height: 30),
 
               // Register Button
-              SizedBox(
+              Container(
                 width: double.infinity,
-                height: 48,
-                child: ElevatedButton(
-                  onPressed: isFormValid
-                      ? () {
-                          // Handle register logic here
-                        }
-                      : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: isFormValid
-                        ? Colors.blue
-                        : Colors.blue.withOpacity(0.5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(24),
+                  boxShadow: const [
+                    BoxShadow(color: Colors.black12, offset: Offset(1, 1)),
+                  ],
+                ),
+                child: const Center(
+                  child: Text(
+                    'Daftar',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
-                  child: const Text("Daftar"),
                 ),
               ),
 
@@ -178,26 +232,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(height: 20),
 
               // Google Register Button
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: OutlinedButton.icon(
-                  onPressed: () {
-                    // TODO: Handle Google Sign Up
-                  },
-                  icon: Image.asset("assets/icons/google_icon.png", height: 24),
-                  label: const Text("Google"),
-                  style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
+              OutlinedButton.icon(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const GoogleAccountDialog(),
+                  );
+                },
+                icon: Image.asset('assets/icons/google_icon.png', width: 20),
+                label: const Text("Google", style: AppTextStyles.button),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: AppColors.lightGrey),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
                   ),
+                  minimumSize: const Size(double.infinity, 40),
                 ),
               ),
-
               const SizedBox(height: 20),
 
-              // Agreement
               const Text(
                 "Dengan mendaftar, Anda menyetujui Persyaratan Layanan dan Kebijakan Privasi",
                 style: TextStyle(fontSize: 12, color: Colors.grey),

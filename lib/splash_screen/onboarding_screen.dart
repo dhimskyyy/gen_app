@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart'; // ✅ untuk TapGestureRecognizer
+import 'package:flutter/gestures.dart';
 import '../theme/app_colors.dart';
 import '../theme/text_styles.dart';
 import 'widgets/onboarding_content.dart';
@@ -129,7 +129,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           style: OutlinedButton.styleFrom(
                             shape: const StadiumBorder(),
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            side: const BorderSide(color: Colors.grey),
+                            side: BorderSide(color: AppColors.lightGrey),
                           ),
                         ),
                       ),
@@ -149,7 +149,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           style: OutlinedButton.styleFrom(
                             shape: const StadiumBorder(),
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            side: const BorderSide(color: Colors.grey),
+                            side: BorderSide(color: AppColors.lightGrey),
                           ),
                         ),
                       ),
@@ -178,7 +178,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         TextSpan(
                           text: "Masuk",
                           style: AppTextStyles.login.copyWith(
-                            color: AppColors.primary, // biru
+                            color: const Color.fromARGB(255, 26, 104, 212), // biru
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {

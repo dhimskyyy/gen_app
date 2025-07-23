@@ -3,7 +3,8 @@ import 'splash_screen/splash_screen.dart';
 import 'home_screen.dart';
 import 'splash_screen/onboarding_screen.dart';
 import 'permission_screen/permission_screen.dart';
-import 'login_screen/login_screen.dart'; // ✅ Tambahkan ini
+import 'login_screen/login_screen.dart';
+import './register_screen.dart/register_screen.dart';
 import 'theme/app_colors.dart';
 
 void main() {
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
         '/onboarding': (context) => const OnboardingScreen(),
         '/permission': (context) => const PermissionScreen(),
         '/home': (context) => const HomeScreen(),
-        '/login': (context) => const LoginScreen(), // ✅ Ini penting
+        '/login': (context) => const LoginScreen(),
+        '/register': (context) => const RegisterScreen(),
       },
     );
   }
