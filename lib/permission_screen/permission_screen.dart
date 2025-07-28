@@ -88,7 +88,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                       Expanded(
                         child: OutlinedButton.icon(
                           onPressed: () =>
-                              Navigator.pushReplacementNamed(context, '/home'),
+                              Navigator.pushReplacementNamed(context, '/linked'),
                           label: Text(
                             "Lanjutkan",
                             style: TextStyle(
@@ -110,7 +110,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                   const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () =>
-                      Navigator.pushReplacementNamed(context, '/home'),
+                      Navigator.pushReplacementNamed(context, '/linked'),
                     child: Text.rich(
                       TextSpan(text: "Lewati untuk sekarang"),
                       style: AppTextStyles.small,
