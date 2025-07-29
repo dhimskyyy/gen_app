@@ -47,12 +47,11 @@ class GoogleAccountDialog extends StatelessWidget {
                   style: const TextStyle(fontSize: 12),
                 ),
                 onTap: () {
-  Navigator.of(context).pushAndRemoveUntil(
-    MaterialPageRoute(builder: (context) => const HomeScreen()),
-    (Route<dynamic> route) => false,
-  );
-}
-
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
+                    (Route<dynamic> route) => false,
+                  );
+                },
               ),
             ),
             const Divider(height: 22),
