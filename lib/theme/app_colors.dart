@@ -11,9 +11,7 @@ class AppColors {
 
   // Soft Colors with Opacity (10%)
   static const Color greenSoft = Color(0x1A4CAF50);
-  static const Color yellowSoft = Color(
-    0x1AFFEB3B,
-  ); // Yellow soft (10% opacity)
+  static const Color yellowSoft = Color(0x1AFFEB3B);
   static const Color redSoft = Color(0x1AF44336);
 
   // Shadow Soft (5% opacity)
@@ -23,5 +21,8 @@ class AppColors {
   static const Color deleteRed = Color(0xFFF44336);
 
   // Text Primary Color
-  static const Color textPrimary = Color(0xFF498DEC); // Sama dengan primary
+  static const Color textPrimary = Color(0xFF498DEC);
+
+  // Primary Soft Color (10% opacity)
+  static const Color primarySoft = Color(0x1A498DEC); // <-- Tambahan ini
 }
