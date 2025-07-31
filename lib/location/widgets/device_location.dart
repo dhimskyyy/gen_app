@@ -89,7 +89,7 @@ class DeviceLocation extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      Icon(Icons.refresh, size: 18, color: AppColors.black54),
+                      Icon(Icons.refresh, size: 18, color: AppColors.black),
                     ],
                   ),
                   const SizedBox(height: 6),

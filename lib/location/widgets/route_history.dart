@@ -104,7 +104,7 @@ class RouteHistory extends StatelessWidget {
       children: [
         Icon(
           isPrimary ? Icons.check_circle : Icons.star_border,
-          color: isPrimary ? Colors.green : AppColors.black54,
+          color: isPrimary ? Colors.green : AppColors.black,
           size: 16,
         ),
         const SizedBox(width: 6),

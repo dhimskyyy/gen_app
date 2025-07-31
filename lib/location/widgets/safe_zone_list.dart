@@ -72,7 +72,7 @@ class _SafeZoneListState extends State<SafeZoneList> {
                                 size: 20,
                                 color: zone['isActive']
                                     ? AppColors.primary
-                                    : AppColors.black54,
+                                    : AppColors.black,
                               ),
                               const SizedBox(width: 8),
                               Column(
@@ -104,7 +104,7 @@ class _SafeZoneListState extends State<SafeZoneList> {
                               IconButton(
                                 icon: Icon(
                                   Icons.delete,
-                                  color: AppColors.black54,
+                                  color: AppColors.black,
                                 ),
                                 onPressed: () => showDeleteDialog(index),
                               ),

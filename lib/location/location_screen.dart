@@ -188,7 +188,7 @@ class LocationScreen extends StatelessWidget {
           children: [
             Icon(
               Icons.location_on,
-              color: isActive ? AppColors.primary : AppColors.black54,
+              color: isActive ? AppColors.primary : AppColors.black,
               size: 20,
             ),
             const SizedBox(width: 8),

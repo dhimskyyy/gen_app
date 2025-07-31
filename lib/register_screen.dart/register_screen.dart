@@ -42,25 +42,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 constraints: const BoxConstraints(),
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () =>
-                    Navigator.pushReplacementNamed(context, '/onboarding'),
+                    Navigator.pushReplacementNamed(context, '/login'),
               ),
-              const Text(
-                'Buat Akun',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
+              const Text('Buat Akun', style: AppTextStyles.titleLogres),
               const SizedBox(height: 4),
               RichText(
                 text: TextSpan(
                   text: 'Sudah punya akun? ',
-                  style: const TextStyle(
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                  ),
+                  style: AppTextStyles.terms,
                   children: [
                     TextSpan(
                       text: 'Masuk',
-                      style: TextStyle(
+                      style: AppTextStyles.terms.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w600,
                       ),
@@ -76,12 +69,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(height: 30),
 
               // Email Field
+              const Text("Alamat E-mail", style: AppTextStyles.textReguler),
+              
               TextField(
                 controller: _emailController,
                 onChanged: (_) => setState(() {}),
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  hintText: "Alamat E-mail",
+                  hintText: "Masukkan alamat email",
+                  hintStyle: AppTextStyles.textPlaceholder,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                     borderSide: BorderSide(color: AppColors.lightGrey),
@@ -111,15 +107,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 12),
 
               // Password Field
+              const Text("Kata Sandi", style: AppTextStyles.textReguler),
               TextField(
                 controller: passwordController,
                 onChanged: (_) => setState(() {}),
                 obscureText: !isPasswordVisible,
                 decoration: InputDecoration(
-                  hintText: "Kata Sandi",
+                  hintText: "Masukkan Kata Sandi",
+                  hintStyle: AppTextStyles.textPlaceholder,
                   suffixIcon: isPasswordFilled
                       ? IconButton(
                           icon: Image.asset(
@@ -149,16 +147,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ),
-
-              const SizedBox(height: 20),
+              const SizedBox(height: 12),
 
               // Confirm Password Field
+              const Text("Konfirmasi Kata Sandi", style: AppTextStyles.textReguler),
               TextField(
                 controller: confirmPasswordController,
                 onChanged: (_) => setState(() {}),
                 obscureText: !isConfirmPasswordVisible,
                 decoration: InputDecoration(
                   hintText: "Konfirmasi Kata Sandi",
+                  hintStyle: AppTextStyles.textPlaceholder,
                   suffixIcon: isConfirmFilled
                       ? IconButton(
                           icon: Image.asset(
@@ -203,33 +202,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     BoxShadow(color: Colors.black12, offset: Offset(1, 1)),
                   ],
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
                     'Daftar',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                    style: AppTextStyles.textReguler.copyWith(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
               ),
-
-              const SizedBox(height: 20),
-
-              // Divider
-              Row(
-                children: const [
-                  Expanded(child: Divider()),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8),
-                    child: Text("atau"),
-                  ),
-                  Expanded(child: Divider()),
-                ],
-              ),
-
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
 
               // Google Register Button
               OutlinedButton.icon(
@@ -251,11 +234,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               const SizedBox(height: 20),
 
-              const Text(
-                "Dengan mendaftar, Anda menyetujui Persyaratan Layanan dan Kebijakan Privasi",
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-                textAlign: TextAlign.center,
-              ),
+              Text.rich(
+                    TextSpan(
+                      text: "Dengan mendaftar, Anda menyetujui ",
+                      style: AppTextStyles.terms,
+                      children: [
+                        TextSpan(
+                          text: "Persyaratan Layanan dan Kebijakan Privasi",
+                          style: AppTextStyles.terms.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    style: AppTextStyles.small,
+                    textAlign: TextAlign.center,
+                  ),
             ],
           ),
         ),

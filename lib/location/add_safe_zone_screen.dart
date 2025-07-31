@@ -88,7 +88,7 @@ class _AddSafeZoneScreenState extends State<AddSafeZoneScreen> {
                       child: Text(
                         'Ganti',
                         style: AppTextStyles.button.copyWith(
-                          color: AppColors.textPrimary,
+                          color: AppColors.primary,
                         ),
                       ),
                     ),

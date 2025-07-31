@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:dotted_border/dotted_border.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,8 +33,8 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       // Foto profil
                       Container(
-                        width: 48,
-                        height: 48,
+                        width: 34,
+                        height: 34,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
@@ -58,7 +57,6 @@ class HomeScreen extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(height: 4),
                           Text(
                             "Selamat Pagi",
                             style: TextStyle(
@@ -72,13 +70,20 @@ class HomeScreen extends StatelessWidget {
 
                       // Icon pesan
                       IconButton(
-                        icon: Image.asset('assets/icons/message_icon.png'),
+                        icon: Image.asset(
+                          'assets/icons/message_icon.png',
+                          width: 24,
+                          height: 24,
+                        ),
                         onPressed: () {},
                       ),
-
                       // Icon tambah
                       IconButton(
-                        icon: Image.asset('assets/icons/add_icon.png'),
+                        icon: Image.asset(
+                          'assets/icons/add_icon.png',
+                          width: 24,
+                          height: 24,
+                        ),
                         onPressed: () {},
                       ),
                     ],
@@ -143,8 +148,7 @@ class HomeScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(16),
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color:
-                                        Colors.grey.shade400,
+                                    color: Colors.grey.shade400,
                                     width: 0.5,
                                   ),
                                   borderRadius: BorderRadius.circular(12),
@@ -268,6 +272,56 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              const SizedBox(height: 18),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Menu Utama",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+
+                              // 4 Kotak Menu Utama
+                              GridView.count(
+                                crossAxisCount: 2,
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                mainAxisSpacing: 12,
+                                crossAxisSpacing: 12,
+                                childAspectRatio: 1.8,
+                                children: const [
+                                  _MainMenuCard(
+                                    title: "Lacak Lokasi",
+                                    iconPath: 'assets/icons/location_icon.png',
+                                    backgroundColor: Color(0xFF21C162),
+                                    textColor: Colors.white,
+                                  ),
+                                  _MainMenuCard(
+                                    title: "Pantau Anak",
+                                    iconPath: 'assets/icons/shield_icon.png',
+                                    backgroundColor: Color(0xFF2C74F2),
+                                    textColor: Colors.white,
+                                  ),
+                                  _MainMenuCard(
+                                    title: "Pemblokiran",
+                                    iconPath: 'assets/icons/block_icon.png',
+                                    backgroundColor: Color(0xFFE94135),
+                                    textColor: Colors.white,
+                                  ),
+                                  _MainMenuCard(
+                                    title: "Pembatasan Waktu",
+                                    iconPath:
+                                        'assets/icons/time_limit_icon.png',
+                                    backgroundColor: Color(0xFFF57C2B),
+                                    textColor: Colors.white,
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -329,6 +383,50 @@ class _InfoBox extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _MainMenuCard extends StatelessWidget {
+  final String title;
+  final String iconPath;
+  final Color backgroundColor;
+  final Color textColor;
+
+  const _MainMenuCard({
+    required this.title,
+    required this.iconPath,
+    required this.backgroundColor,
+    required this.textColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(iconPath, width: 24, height: 24, color: textColor),
+            const SizedBox(height: 10),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: textColor,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

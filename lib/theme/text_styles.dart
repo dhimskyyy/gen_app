@@ -2,37 +2,44 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 class AppTextStyles {
-  static const TextStyle skip = TextStyle(color: AppColors.black87);
+  static const TextStyle textReguler = TextStyle(fontSize: 14, color: AppColors.black, fontWeight: FontWeight.w400);
+  static const TextStyle textPlaceholder = TextStyle(fontSize: 14, color: AppColors.black, fontWeight: FontWeight.w200);
 
   static const TextStyle button = TextStyle(
     fontWeight: FontWeight.w600,
-    color: AppColors.black87,
+    color: AppColors.black,
   );
 
   static const TextStyle small = TextStyle(fontSize: 12);
 
-  static const TextStyle terms = TextStyle(fontWeight: FontWeight.w500);
+  static const TextStyle terms = TextStyle(fontSize: 12, color: AppColors.black, fontWeight: FontWeight.w400);
 
-  static const TextStyle login = TextStyle(
+  static const TextStyle textBlue = TextStyle(
     fontSize: 14,
-    color: AppColors.black87,
+    color: AppColors.primary,
   );
 
   static const TextStyle title = TextStyle(
-    fontSize: 20,
-    fontWeight: FontWeight.w700,
+    fontSize: 22,
+    fontWeight: FontWeight.w600,
+    color: AppColors.black,
+  );
+
+  static const TextStyle titleLogres = TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.w600,
     color: AppColors.black,
   );
 
   static const TextStyle subtitle = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: AppColors.black87,
+    color: AppColors.black,
   );
 
   static const TextStyle description = TextStyle(
     fontSize: 14,
-    color: AppColors.black54,
+    color: AppColors.black,
     fontWeight: FontWeight.w400,
   );
 

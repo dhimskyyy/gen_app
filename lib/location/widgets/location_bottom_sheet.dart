@@ -27,7 +27,7 @@ class LocationBottomSheet extends StatelessWidget {
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: AppColors.black26,
+              color: AppColors.black,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -43,7 +43,7 @@ class LocationBottomSheet extends StatelessWidget {
                 child: Text(
                   'Cari Lokasi',
                   style: AppTextStyles.button.copyWith(
-                    color: AppColors.textPrimary,
+                    color: AppColors.primary,
                   ),
                 ),
               ),

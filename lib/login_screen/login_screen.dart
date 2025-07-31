@@ -58,23 +58,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () =>
                     Navigator.pushReplacementNamed(context, '/onboarding'),
               ),
-              const Text(
-                'Masuk',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
+              const Text('Masuk', style: AppTextStyles.titleLogres),
               const SizedBox(height: 4),
               RichText(
                 text: TextSpan(
                   text: 'Belum punya akun? ',
-                  style: const TextStyle(
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                  ),
+                  style: AppTextStyles.terms,
                   children: [
                     TextSpan(
                       text: 'Daftar',
-                      style: TextStyle(
+                      style: AppTextStyles.terms.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w600,
                       ),
@@ -87,11 +80,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 32),
+              const Text("Alamat Email", style: AppTextStyles.textReguler),
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  hintText: "Alamat Email",
+                  hintText: "Masukkan Alamat Email",
+                  hintStyle: AppTextStyles.textPlaceholder,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                     borderSide: BorderSide(color: AppColors.lightGrey),
@@ -122,11 +117,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               const SizedBox(height: 18),
+              const Text("Kata Sandi", style: AppTextStyles.textReguler),
               TextField(
                 controller: _passwordController,
                 obscureText: _obscureText,
                 decoration: InputDecoration(
-                  hintText: "Kata Sandi",
+                  hintText: "Masukkan Kata Sandi",
+                  hintStyle: AppTextStyles.textPlaceholder,
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: AppColors.lightGrey),
                   ),
@@ -165,27 +162,32 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              Container(
-                width: double.infinity,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(24),
-                  boxShadow: const [
-                    BoxShadow(color: Colors.black12, offset: Offset(1, 1)),
-                  ],
-                ),
-                child: const Center(
-                  child: Text(
-                    'Masuk',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ),
+              SizedBox(
+  width: double.infinity,
+  height: 40,
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.pushNamed(context, '/step_intro');
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: AppColors.primary,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
+      ),
+      elevation: 2,
+      shadowColor: Colors.black12,
+    ),
+    child: const Text(
+      'Masuk',
+      style: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+      ),
+    ),
+  ),
+),
+
               const SizedBox(height: 20),
               Row(
                 children: const [

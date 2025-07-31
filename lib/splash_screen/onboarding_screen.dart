@@ -68,7 +68,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: TextButton(
                   onPressed: () =>
                       Navigator.pushReplacementNamed(context, '/permission'),
-                  child: Text("Lewati", style: AppTextStyles.skip),
+                  child: Text("Lewati", style: AppTextStyles.textReguler),
                 ),
               ),
             ),
@@ -133,36 +133,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            'assets/icons/gmail_icon.png',
-                            width: 20,
-                            height: 20,
-                          ),
-                          label: Text(
-                            "Alamat E-mail",
-                            style: AppTextStyles.button,
-                          ),
-                          style: OutlinedButton.styleFrom(
-                            shape: const StadiumBorder(),
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            side: BorderSide(color: AppColors.lightGrey),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                   const SizedBox(height: 10),
                   Text.rich(
                     TextSpan(
                       text: "Dengan mendaftar, Anda menyetujui ",
+                      style: AppTextStyles.terms,
                       children: [
                         TextSpan(
                           text: "Persyaratan Layanan dan Kebijakan Privasi",
-                          style: AppTextStyles.terms,
+                          style: AppTextStyles.terms.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
@@ -173,12 +156,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Text.rich(
                     TextSpan(
                       text: "Sudah punya akun? ",
-                      style: AppTextStyles.login, // abu-abu
+                      style: AppTextStyles.terms,
                       children: [
                         TextSpan(
                           text: "Masuk",
-                          style: AppTextStyles.login.copyWith(
-                            color: const Color.fromARGB(255, 26, 104, 212), // biru
+                          style: AppTextStyles.terms.copyWith(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.w600,
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {

@@ -7,6 +7,8 @@ import 'login_screen/login_screen.dart';
 import './register_screen.dart/register_screen.dart';
 import 'linked_screen/linked_screen.dart';
 import 'linked_screen/step_install_child.dart';
+import 'linked_screen/step_connect_device.dart';
+import 'linked_screen/step_success.dart';
 import 'theme/app_colors.dart';
 
 void main() {
@@ -35,7 +37,10 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/linked': (context) => const StepIntro(),
-        '/step_linked': (context) => const StepInstallChild(),
+        '/step_intro': (context) => const StepIntro(),
+        '/step_install_child': (context) => const StepInstallChild(),
+        '/step_connect_device': (context) => const StepConnectDevice(),
+        '/step_success': (context) => const StepSuccess(),
       },
     );
   }
