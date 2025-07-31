@@ -41,7 +41,7 @@ class _AddSiteDialogState extends State<AddSiteDialog> {
                 hintText: 'Masukkan URL',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: AppColors.black26),
+                  borderSide: BorderSide(color: AppColors.black),
                 ),
               ),
             ),

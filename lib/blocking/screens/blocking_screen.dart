@@ -104,7 +104,7 @@ class BockingScreen extends StatelessWidget {
               const SizedBox(height: 12),
               Container(
                 decoration: BoxDecoration(
-                  color: AppColors.primarySoft,
+                  color: AppColors.greenSoft,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 padding: const EdgeInsets.symmetric(

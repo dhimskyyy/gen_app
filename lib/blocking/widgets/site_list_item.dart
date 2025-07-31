@@ -26,7 +26,7 @@ class SiteListItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(Icons.language, color: AppColors.black54),
+          Icon(Icons.language, color: AppColors.black),
           const SizedBox(width: 12),
           Expanded(
             child: Text(

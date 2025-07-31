@@ -50,7 +50,7 @@ class _KeywordListScreenState extends State<KeywordListScreen> {
                 hintText: 'Nama kategori',
                 filled: true,
                 fillColor: AppColors.lightGrey,
-                prefixIcon: Icon(Icons.search, color: AppColors.black54),
+                prefixIcon: Icon(Icons.search, color: AppColors.black),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,

@@ -65,7 +65,7 @@ class _SiteListScreenState extends State<SiteListScreen> {
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: AppColors.black26),
+                  borderSide: BorderSide(color: AppColors.black),
                 ),
               ),
             ),
