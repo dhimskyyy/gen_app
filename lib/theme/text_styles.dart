@@ -3,14 +3,14 @@ import 'app_colors.dart';
 
 class AppTextStyles {
   static const TextStyle textReguler = TextStyle(fontSize: 14, color: AppColors.black, fontWeight: FontWeight.w400);
-  static const TextStyle textPlaceholder = TextStyle(fontSize: 14, color: AppColors.black, fontWeight: FontWeight.w200);
+  static final TextStyle textEmail = TextStyle(fontSize: 12, color: AppColors.black);
+  static const TextStyle textPlaceholder = TextStyle(fontSize: 14, color: AppColors.placeholder);
 
   static const TextStyle button = TextStyle(
     fontWeight: FontWeight.w600,
     color: AppColors.black,
   );
 
-  static const TextStyle small = TextStyle(fontSize: 12);
 
   static const TextStyle terms = TextStyle(fontSize: 12, color: AppColors.black, fontWeight: FontWeight.w400);
 

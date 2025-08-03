@@ -142,14 +142,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       style: AppTextStyles.terms,
                       children: [
                         TextSpan(
-                          text: "Persyaratan Layanan dan Kebijakan Privasi",
-                          style: AppTextStyles.terms.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        text: 'Persyaratan Layanan',
+                        style: AppTextStyles.terms.copyWith(
+                          fontWeight: FontWeight.bold,
                         ),
+                      ),
+                      const TextSpan(text: ' dan '),
+                      TextSpan(
+                        text: 'Kebijakan Privasi',
+                        style: AppTextStyles.terms.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       ],
                     ),
-                    style: AppTextStyles.small,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),

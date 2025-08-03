@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gen_app/theme/text_styles.dart';
 import '../data/google_accounts.dart';
 import '../../../home_screen.dart';
 
@@ -18,15 +19,15 @@ class GoogleAccountDialog extends StatelessWidget {
           children: [
             Image.asset('assets/icons/google_icon.png', width: 32),
             const SizedBox(height: 12),
-            const Text(
+            Text(
               "Pilih Akun",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              style: AppTextStyles.textReguler.copyWith(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 4),
-            const Text(
+            Text(
               "Untuk melanjutkan ke Gen Parental Control",
-              style: TextStyle(fontSize: 13),
-              textAlign: TextAlign.center,
+              style: AppTextStyles.textReguler,
             ),
             const SizedBox(height: 14),
             ...googleAccounts.map(
@@ -41,10 +42,10 @@ class GoogleAccountDialog extends StatelessWidget {
                           style: const TextStyle(color: Colors.black),
                         ),
                       ),
-                title: Text(acc['name']!, style: const TextStyle(fontSize: 14)),
+                title: Text(acc['name']!, style: AppTextStyles.textReguler),
                 subtitle: Text(
                   acc['email']!,
-                  style: const TextStyle(fontSize: 12),
+                  style: AppTextStyles.textEmail,
                 ),
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(

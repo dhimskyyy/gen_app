@@ -163,32 +163,32 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 24),
               SizedBox(
-  width: double.infinity,
-  height: 40,
-  child: ElevatedButton(
-    onPressed: () {
-      Navigator.pushNamed(context, '/step_intro');
-    },
-    style: ElevatedButton.styleFrom(
-      backgroundColor: AppColors.primary,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
-      ),
-      elevation: 2,
-      shadowColor: Colors.black12,
-    ),
-    child: const Text(
-      'Masuk',
-      style: TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-        fontSize: 16,
-      ),
-    ),
-  ),
-),
+                width: double.infinity,
+                height: 40,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/step_intro');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    elevation: 2,
+                    shadowColor: Colors.black12,
+                  ),
+                  child: const Text(
+                    'Masuk',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Row(
                 children: const [
                   Expanded(child: Divider()),
@@ -199,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Expanded(child: Divider()),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
               OutlinedButton.icon(
                 onPressed: () {
                   showDialog(

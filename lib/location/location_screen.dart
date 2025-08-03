@@ -127,9 +127,9 @@ class LocationScreen extends StatelessWidget {
       children: [
         CircleAvatar(radius: 5, backgroundColor: AppColors.primary),
         const SizedBox(height: 4),
-        Text(time, style: AppTextStyles.small),
+        Text(time, style: AppTextStyles.textReguler),
         const SizedBox(height: 2),
-        Text(location, style: AppTextStyles.small),
+        Text(location, style: AppTextStyles.textReguler),
       ],
     );
   }

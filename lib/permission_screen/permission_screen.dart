@@ -14,7 +14,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
   final PageController _controller = PageController();
   int currentPage = 0;
 
-  final List<Map<String, String>> onboardingData = [
+  final List<Map<String, String>> permissionData = [
     {
       "image": "assets/icons/location_icon.png",
       "title": "Izin Lokasi",
@@ -45,23 +45,34 @@ class _PermissionScreenState extends State<PermissionScreen> {
       body: SafeArea(
         child: Column(
           children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: TextButton(
+                  onPressed: () =>
+                      Navigator.pushReplacementNamed(context, '/linked'),
+                  child: Text("Lewati", style: AppTextStyles.textReguler),
+                ),
+              ),
+            ),
             Expanded(
               child: PageView.builder(
                 controller: _controller,
                 onPageChanged: (index) => setState(() => currentPage = index),
-                itemCount: onboardingData.length,
+                itemCount: permissionData.length,
                 itemBuilder: (context, index) => PermissionContent(
-                  imageAsset: onboardingData[index]['image']!,
-                  title: onboardingData[index]['title']!,
-                  subtitle: onboardingData[index]['subtitle']!,
-                  description: onboardingData[index]['description']!,
+                  imageAsset: permissionData[index]['image']!,
+                  title: permissionData[index]['title']!,
+                  subtitle: permissionData[index]['subtitle']!,
+                  description: permissionData[index]['description']!,
                 ),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                onboardingData.length,
+                permissionData.length,
                 (index) => AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   margin: const EdgeInsets.symmetric(
@@ -97,7 +108,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                             ),
                           ),
                           style: OutlinedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4886DE),
+                            backgroundColor: AppColors.primary,
                             shape: const StadiumBorder(),
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             side: const BorderSide(color: Colors.grey),
@@ -113,7 +124,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                       Navigator.pushReplacementNamed(context, '/linked'),
                     child: Text.rich(
                       TextSpan(text: "Lewati untuk sekarang"),
-                      style: AppTextStyles.small,
+                      style: AppTextStyles.terms,
                       textAlign: TextAlign.center,
                     ),
                   ),

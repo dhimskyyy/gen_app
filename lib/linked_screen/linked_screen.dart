@@ -27,7 +27,41 @@ class StepIntro extends StatelessWidget {
                 const Text(
                   'Dengan Gen Parental Control, orang tua dapat mengawasi bagaimana anak-anak menggunakan perangkat mereka. Anda harus menautkan perangkat anak terlebih dahulu.',
                   style: AppTextStyles.description,
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.justify,
+                ),
+                const SizedBox(height: 10),
+                RichText(
+                  textAlign: TextAlign.justify,
+                  text: TextSpan(
+                    style: AppTextStyles.description.copyWith(height: 1.5),
+                    children: [
+                      const TextSpan(
+                        text:
+                            'Sebelum melanjutkan menggunakan layanan kami, Anda telah membaca dan memahami sepenuhnya ',
+                      ),
+                      TextSpan(
+                        text: 'Persyaratan Layanan',
+                        style: AppTextStyles.description.copyWith(
+                          height: 1.5,
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const TextSpan(text: ' dan '),
+                      TextSpan(
+                        text: 'Kebijakan Privasi',
+                        style: AppTextStyles.description.copyWith(
+                          height: 1.5,
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const TextSpan(
+                        text:
+                            ' kami. Anda secara tegas berjanji untuk mematuhi hukum dan peraturan yang berlaku di wilayah Anda selama penggunaan aplikasi. Kami peduli dengan keselamatan dan kesejahteraan anak-anak dan menghargai privasi. Anda setuju dan mengizinkan produk kami untuk mendapatkan data dan informasi dari perangkat anak Anda.',
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -36,19 +70,30 @@ class StepIntro extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () {},
-                  child: const Text(
+                  child: Text(
                     'Tidak Sekarang',
-                    style: AppTextStyles.button,
+                    style: AppTextStyles.description.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/step_install_child');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
+                SizedBox(
+                  width: 150,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/step_install_child');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                    ),
+                    child: Text(
+                      'Setuju',
+                      style: AppTextStyles.description.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                  child: const Text('Setuju'),
                 ),
               ],
             ),

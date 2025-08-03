@@ -10,8 +10,6 @@ class StepInstallChild extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(''),
-        elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
       ),
@@ -25,7 +23,7 @@ class StepInstallChild extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEFFBF4),
+                  color: AppColors.lightGreen,
                   shape: BoxShape.circle,
                 ),
                 child: Image.asset(
@@ -43,7 +41,7 @@ class StepInstallChild extends StatelessWidget {
             const SizedBox(height: 16),
             const Text(
               'Untuk memulai, Anda perlu memasang aplikasi di HP anak Anda. Silakan scan QR Code atau download melalui link dibawah.',
-              style: AppTextStyles.subtitle,
+              style: AppTextStyles.description,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
@@ -54,34 +52,42 @@ class StepInstallChild extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.15),
-                    blurRadius: 12,
-                    offset: const Offset(0, 6),
+                    color: AppColors.black.withOpacity(0.1),
+                    blurRadius: 100,
+                    offset: const Offset(0, 0),
                   ),
                 ],
               ),
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     'Hubungkan dengan perangkat anak',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                    style: AppTextStyles.textReguler.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 28),
                   Image.asset(
                     'assets/images/qr_code.png',
-                    width: 180,
-                    height: 180,
+                    width: 250,
+                    height: 250,
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 28),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         'https://publika.app/redirect=?',
-                        style: TextStyle(color: Colors.blue, fontSize: 14),
+                        style: AppTextStyles.textReguler.copyWith(
+                          color: AppColors.primary,
+                        ),
                       ),
-                      SizedBox(width: 4),
-                      Icon(Icons.share, size: 18, color: Colors.grey),
+                      const SizedBox(width: 10),
+                      Image.asset(
+                        'assets/icons/share_icon.png',
+                        height: 18,
+                        color: AppColors.black,
+                      ),
                     ],
                   ),
                 ],
@@ -91,25 +97,51 @@ class StepInstallChild extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                OutlinedButton(
-                  onPressed: () => Navigator.pop(context),
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.grey),
-                  ),
-                  child: const Text('Kembali'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/step_connect_device');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 12,
+                SizedBox(
+                  width: 150,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/linked');
+                    },
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(
+                        color: AppColors.grey,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          24,
+                        ), // radius optional
+                      ),
+                    ),
+                    child: Text(
+                      'Kembali',
+                      style: AppTextStyles.description.copyWith(
+                        color: const Color(
+                          0xFF1A67D4,
+                        ), // warna teks sama dengan border
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  child: const Text('Lanjutkan'),
+                ),
+
+                SizedBox(
+                  width: 150,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/step_connect_device');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                    ),
+                    child: Text(
+                      'Setuju',
+                      style: AppTextStyles.description.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

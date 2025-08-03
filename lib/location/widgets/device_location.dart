@@ -83,7 +83,7 @@ class DeviceLocation extends StatelessWidget {
                         ),
                         child: Text(
                           'Terakhir diperbarui 13:08',
-                          style: AppTextStyles.small.copyWith(
+                          style: AppTextStyles.textReguler.copyWith(
                             color: AppColors.primary,
                           ),
                         ),
