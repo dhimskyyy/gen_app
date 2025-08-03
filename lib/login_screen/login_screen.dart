@@ -15,12 +15,30 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
+  String? _emailErrorText;
+
+  bool get _isFormValid =>
+      _emailController.text.isNotEmpty &&
+      _passwordController.text.isNotEmpty &&
+      _isValidEmail(_emailController.text);
+
+  bool _isValidEmail(String email) {
+    final emailRegex = RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+    return emailRegex.hasMatch(email);
+  }
 
   @override
   void initState() {
     super.initState();
     _emailController.addListener(() {
-      setState(() {});
+      setState(() {
+        final email = _emailController.text;
+        if (email.isEmpty || _isValidEmail(email)) {
+          _emailErrorText = null;
+        } else {
+          _emailErrorText = 'Format email tidak valid';
+        }
+      });
     });
     _passwordController.addListener(() {
       setState(() {});
@@ -87,6 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: InputDecoration(
                   hintText: "Masukkan Alamat Email",
                   hintStyle: AppTextStyles.textPlaceholder,
+                  errorText: _emailErrorText,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                     borderSide: BorderSide(color: AppColors.lightGrey),
@@ -115,7 +134,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 18),
               const Text("Kata Sandi", style: AppTextStyles.textReguler),
               TextField(
@@ -166,9 +184,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: double.infinity,
                 height: 40,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/step_intro');
-                  },
+                  onPressed: _isFormValid
+                      ? () {
+                          Navigator.pushNamed(context, '/step_intro');
+                        }
+                      : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     shape: RoundedRectangleBorder(
@@ -187,7 +207,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 10),
               Row(
                 children: const [

@@ -20,7 +20,7 @@ class KeywordListItem extends StatelessWidget {
         children: [
           Icon(Icons.lock_outline, color: AppColors.primary),
           const SizedBox(width: 12),
-          Expanded(child: Text(keyword, style: AppTextStyles.textBlack)),
+          Expanded(child: Text(keyword, style: AppTextStyles.textReguler)),
           IconButton(
             icon: Icon(Icons.delete, color: AppColors.deleteRed),
             onPressed: onDelete,

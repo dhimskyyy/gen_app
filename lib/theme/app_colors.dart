@@ -9,7 +9,7 @@ class AppColors {
   static final Color lightGrey = const Color(0xFFE0E0E0);
   static final Color lightGreen =  Color(0xFFEFFBF4);
 
-  static const Color greenSoft = Color(0x1A4CAF50);
+  static const Color greenSoft = Color(0xFF21C162);
   static const Color yellowSoft = Color(
     0x1AFFEB3B,
   );

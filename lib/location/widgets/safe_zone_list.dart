@@ -46,7 +46,7 @@ class _SafeZoneListState extends State<SafeZoneList> {
         backgroundColor: AppColors.white,
         elevation: 0,
         centerTitle: true,
-        title: Text('Zona Aman', style: AppTextStyles.textBlack),
+        title: Text('Zona Aman', style: AppTextStyles.textReguler),
         automaticallyImplyLeading: false,
       ),
       body: Stack(
@@ -80,7 +80,7 @@ class _SafeZoneListState extends State<SafeZoneList> {
                                 children: [
                                   Text(
                                     zone['title'],
-                                    style: AppTextStyles.textBlack,
+                                    style: AppTextStyles.textReguler,
                                   ),
                                   Text(
                                     zone['address'],
@@ -157,7 +157,7 @@ class _SafeZoneListState extends State<SafeZoneList> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Hapus Zona Aman', style: AppTextStyles.textBlack),
+              Text('Hapus Zona Aman', style: AppTextStyles.textReguler),
               const SizedBox(height: 12),
               Text(
                 'Anda tidak dapat lagi memantau data lokasi, setelah menghapus zona aman.',

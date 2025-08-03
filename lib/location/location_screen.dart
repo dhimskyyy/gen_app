@@ -10,7 +10,7 @@ class LocationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.primary,
+        backgroundColor: AppColors.greenSoft,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -21,8 +21,6 @@ class LocationScreen extends StatelessWidget {
             ),
           ],
         ),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
         toolbarHeight: 70,
       ),
       body: SingleChildScrollView(
@@ -33,7 +31,7 @@ class LocationScreen extends StatelessWidget {
             children: [
               _currentLocationCard(),
               const SizedBox(height: 20),
-              Text('Riwayat Lokasi Hari Ini', style: AppTextStyles.textBlack),
+              Text('Riwayat Lokasi Hari Ini', style: AppTextStyles.textReguler),
               const SizedBox(height: 12),
               _locationHistory(),
               const SizedBox(height: 20),
@@ -67,14 +65,14 @@ class LocationScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Lokasi Saat ini', style: AppTextStyles.textBlack),
+              Text('Lokasi Saat ini', style: AppTextStyles.textReguler),
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.1),
+                  color: AppColors.greenSoft.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text('Zona Aman', style: AppTextStyles.zone),
@@ -99,7 +97,7 @@ class LocationScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
               child: Text('Buka Peta Lengkap', style: AppTextStyles.textWhite),
@@ -151,7 +149,7 @@ class LocationScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Zona Aman', style: AppTextStyles.textBlack),
+          Text('Zona Aman', style: AppTextStyles.textReguler),
           const SizedBox(height: 12),
           safeZoneItem('Rumah', 'Jl. Mawar No.123', true),
           const SizedBox(height: 12),
@@ -195,7 +193,7 @@ class LocationScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: AppTextStyles.textBlack),
+                Text(title, style: AppTextStyles.textReguler),
                 Text(address, style: AppTextStyles.description),
               ],
             ),
@@ -227,7 +225,7 @@ class LocationScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Pengaturan Notifikasi', style: AppTextStyles.textBlack),
+          Text('Pengaturan Notifikasi', style: AppTextStyles.textReguler),
           const SizedBox(height: 12),
           notificationItem(
             title: 'Baterai Lemah',
@@ -265,7 +263,7 @@ class LocationScreen extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: AppTextStyles.textBlack),
+              Text(title, style: AppTextStyles.textReguler),
               Text(subtitle, style: AppTextStyles.description),
             ],
           ),

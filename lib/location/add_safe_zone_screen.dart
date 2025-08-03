@@ -67,7 +67,7 @@ class _AddSafeZoneScreenState extends State<AddSafeZoneScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Lokasi', style: AppTextStyles.textBlack),
+                Text('Lokasi', style: AppTextStyles.textReguler),
                 const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

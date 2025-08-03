@@ -31,7 +31,7 @@ class SiteListItem extends StatelessWidget {
           Expanded(
             child: Text(
               siteUrl,
-              style: AppTextStyles.textBlack,
+              style: AppTextStyles.textReguler,
               overflow: TextOverflow.ellipsis,
             ),
           ),

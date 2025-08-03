@@ -93,7 +93,7 @@ class StepInstallChild extends StatelessWidget {
                 ],
               ),
             ),
-            const Spacer(),
+            const SizedBox(height: 84),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

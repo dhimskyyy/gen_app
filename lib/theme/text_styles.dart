@@ -45,25 +45,19 @@ class AppTextStyles {
 
   static const TextStyle textWhite = TextStyle(
     fontSize: 14,
-    color: Color.fromARGB(137, 255, 255, 255),
+    color: Color.fromARGB(255, 255, 255, 255),
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle extraSmallWhite = TextStyle(
     fontSize: 12,
-    color: Color.fromARGB(137, 255, 255, 255),
-    fontWeight: FontWeight.w400,
-  );
-
-  static const TextStyle textBlack = TextStyle(
-    fontSize: 14,
-    color: Color.fromARGB(136, 0, 0, 0),
+    color: Color.fromARGB(255, 255, 255, 255),
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle zone = TextStyle(
     fontSize: 14,
-    color: Color(0x24DD7D),
-    fontWeight: FontWeight.w400,
+    color: Color.fromARGB(255, 36, 221, 125),
+    fontWeight: FontWeight.w600,
   );
 }

@@ -48,7 +48,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
           icon: const Icon(Icons.arrow_back, color: AppColors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text('Kembali', style: AppTextStyles.textBlack),
+        title: Text('Kembali', style: AppTextStyles.textReguler),
         centerTitle: true,
       ),
       body: Padding(
@@ -84,7 +84,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                       Icons.location_on,
                       color: AppColors.primary,
                     ),
-                    title: Text(location, style: AppTextStyles.textBlack),
+                    title: Text(location, style: AppTextStyles.textReguler),
                     onTap: () {
                       Navigator.pop(context, location);
                     },

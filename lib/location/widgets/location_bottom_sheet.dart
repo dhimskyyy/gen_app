@@ -35,7 +35,7 @@ class LocationBottomSheet extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Lokasi', style: AppTextStyles.textBlack),
+              Text('Lokasi', style: AppTextStyles.textReguler),
               TextButton(
                 onPressed: () {
                   // Tidak ada action navigasi dulu
@@ -54,7 +54,7 @@ class LocationBottomSheet extends StatelessWidget {
             (location) => ListTile(
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.location_on, color: AppColors.primary),
-              title: Text(location, style: AppTextStyles.textBlack),
+              title: Text(location, style: AppTextStyles.textReguler),
               onTap: () {
                 // Tidak ada navigasi, hanya close bottom sheet
                 Navigator.pop(context);

@@ -143,7 +143,7 @@ class StepConnectDevice extends StatelessWidget {
               ),
             ),
 
-            const Spacer(),
+            const SizedBox(height: 54),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -151,7 +151,7 @@ class StepConnectDevice extends StatelessWidget {
                   width: 150,
                   child: OutlinedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/linked');
+                      Navigator.pushNamed(context, '/step_install_child');
                     },
                     style: OutlinedButton.styleFrom(
                       side: BorderSide(color: AppColors.grey),
@@ -177,7 +177,7 @@ class StepConnectDevice extends StatelessWidget {
                   width: 150,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/step_connect_device');
+                      Navigator.pushNamed(context, '/step_success');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,

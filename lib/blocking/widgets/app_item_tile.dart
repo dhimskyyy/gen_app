@@ -17,7 +17,7 @@ class AppItemTile extends StatelessWidget {
         children: [
           Image.asset(app.iconPath, width: 32, height: 32),
           const SizedBox(width: 12),
-          Expanded(child: Text(app.name, style: AppTextStyles.textBlack)),
+          Expanded(child: Text(app.name, style: AppTextStyles.textReguler)),
           Switch(
             value: app.isBlocked,
             onChanged: onToggle,

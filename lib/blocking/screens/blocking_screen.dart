@@ -93,7 +93,7 @@ class BockingScreen extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 title: Text(
                   'Sensor Gambar Tidak Pantas',
-                  style: AppTextStyles.textBlack,
+                  style: AppTextStyles.textReguler,
                 ),
                 subtitle: Text(
                   'Aktifkan filter gambar yang tidak pantas',
@@ -114,10 +114,12 @@ class BockingScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('247 Gambar Difilter', style: AppTextStyles.textBlack),
+                    Text('247 Gambar Difilter', style: AppTextStyles.textReguler),
                     Text(
                       '95,8% Akurasi Filter',
-                      style: AppTextStyles.textBlack,
+                      style: AppTextStyles.textReguler.copyWith(
+                        color: AppColors.primary,
+                      ),
                     ),
                   ],
                 ),
@@ -145,7 +147,7 @@ class BockingScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(appName, style: AppTextStyles.textBlack),
+                Text(appName, style: AppTextStyles.textReguler),
                 Text(
                   status,
                   style: isBlocked
@@ -174,7 +176,7 @@ class BockingScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: AppTextStyles.textBlack),
+                Text(title, style: AppTextStyles.textReguler),
                 Text(subtitle, style: AppTextStyles.description),
               ],
             ),

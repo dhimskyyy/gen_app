@@ -116,7 +116,9 @@ class _AppListScreenState extends State<AppListScreen> {
                 ? Center(
                     child: Text(
                       'Aplikasi tidak ditemukan',
-                      style: AppTextStyles.textBlack,
+                      style: AppTextStyles.textReguler.copyWith(
+                        color: AppColors.placeholder,
+                      ),
                     ),
                   )
                 : ListView.builder(
