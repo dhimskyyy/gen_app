@@ -10,10 +10,11 @@ class AppColors {
   static final Color lightGreen =  Color(0xFFEFFBF4);
 
   static const Color greenSoft = Color(0xFF21C162);
+  static const Color greySoft = Color.fromARGB(107, 185, 187, 186);
   static const Color yellowSoft = Color(
     0x1AFFEB3B,
   );
-  static const Color redSoft = Color(0x1AF44336);
+  static const Color redSoft = Color.fromARGB(255, 228, 37, 23);
 
   // Shadow Soft (5% opacity)
   static const Color shadowSoft = Color(0x0D000000);

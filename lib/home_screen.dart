@@ -301,6 +301,8 @@ class HomeScreen extends StatelessWidget {
                           iconPath: 'assets/icons/block_icon.png',
                           backgroundColor: Color(0xFFE94135),
                           textColor: Colors.white,
+                          onTap: () =>
+                              Navigator.pushNamed(context, '/blocking'),
                         ),
                         _MainMenuCard(
                           title: "Pembatasan Waktu",

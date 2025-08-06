@@ -43,6 +43,12 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
   );
 
+  static const sectionTitle = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: Colors.black,
+  );
+
   static const TextStyle textWhite = TextStyle(
     fontSize: 14,
     color: Color.fromARGB(255, 255, 255, 255),
@@ -60,4 +66,34 @@ class AppTextStyles {
     color: Color.fromARGB(255, 36, 221, 125),
     fontWeight: FontWeight.w600,
   );
+
+  static const titleAppBar = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: Colors.black,
+  );
+
+  static const itemTitle = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: Colors.black,
+  );
+
+  static const categoryLabel = TextStyle(
+    fontSize: 12,
+    color: Color.fromARGB(255, 0, 0, 0),
+  );
+
+  static const badgeText = TextStyle(
+    fontSize: 12,
+    color: Colors.white,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const addButton = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  );
+
 }

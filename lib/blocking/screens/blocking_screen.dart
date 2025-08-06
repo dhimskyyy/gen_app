@@ -1,206 +1,242 @@
 import 'package:flutter/material.dart';
+import '../widgets/section_card.dart';
+import '../widgets/filter_image.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
-import '../screens/site_list_screen.dart';
-import '../screens/keyword_list_screen.dart';
-import '../screens/app_list_screen.dart';
-import '../widgets/section_card.dart';
 
-class BockingScreen extends StatelessWidget {
-  const BockingScreen({super.key});
+class BlockingScreen extends StatelessWidget {
+  const BlockingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.lightGrey,
       appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: AppColors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Text(
-          'Pemblokiran dan Pembatasan',
-          style: AppTextStyles.textWhite,
-        ),
+        backgroundColor: Colors.white,
         elevation: 0,
+        title: const Text(
+          "Pemblokiran & Pembatasan",
+          style: AppTextStyles.titleAppBar,
+        ),
+        centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         children: [
           SectionCard(
-            title: 'Blokir Aplikasi',
+            title: "Blokir Aplikasi",
+            iconPath: "assets/images/shield.png",
             children: [
-              _appItemWithImage('tiktok.png', 'TikTok', 'Diblokir', true),
-              _appItemWithImage(
-                'mobilelegend.png',
-                'Mobile Legends',
-                'Game',
-                false,
+              _appItem(
+                "TikTok",
+                "assets/images/tiktok.png",
+                "Diblokir",
+                "Media Sosial",
+                true,
               ),
-              _appItemWithImage(
-                'whatsapp.png',
-                'WhatsApp',
-                'Pesan/Call',
-                false,
+              _appItem(
+                "Mobile Legends",
+                "assets/images/mobilelegend.png",
+                "Diblokir",
+                "Game",
+                true,
               ),
-              _addButton('Tambah Aplikasi Untuk Diblokir', () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AppListScreen(),
-                  ),
-                );
-              }),
+              _appItem(
+                "WhatsApp",
+                "assets/images/whatsapp.png",
+                "Diblokir",
+                "Pesan/Call",
+                true,
+              ),
+              _addButton("Tambah Aplikasi untuk Diblokir"),
             ],
           ),
           SectionCard(
-            title: 'Blokir Situs Web',
+            title: "Blokir Situs Web",
+            iconPath: "assets/images/shield.png",
             children: [
-              _switchItem('Situs Dewasa', 'Konten pornografi', true),
-              _switchItem('Judi Online', 'Slot, Togel', true),
-              _switchItem('Media Sosial', 'Facebook, X, IG', false),
-              _addButton('Tambah Situs Untuk Diblokir', () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SiteListScreen(),
-                  ),
-                );
-              }),
+              _allItem("Situs Dewasa", "Konten tidak pantas", true),
+              _allItem("Judi Online", "Konten tidak pantas", true),
+              _allItem("Media Sosial", "Facebook, X, dll", false),
+              _addButton("Tambah Situs untuk Diblokir"),
             ],
           ),
           SectionCard(
-            title: 'Blokir Kata Kunci',
+            title: "Blokir Kata Kunci",
+            iconPath: "assets/images/shield.png",
             children: [
-              _switchItem('Kata Kasar', '17 data', true),
-              _switchItem('Konten Dewasa', '64 data', true),
-              _switchItem('Kekerasan', '50 data', false),
-              _addButton('Tambah Kata Kunci Baru', () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const KeywordListScreen(),
-                  ),
-                );
-              }),
+              _allItem("Kata Kasar", "12 Kata", true),
+              _allItem("Konten Dewasa", "8 Kata", true),
+              _allItem("Kekerasan", "19 Kata", false),
+              _addButton("Tambah Kata Kunci Baru"),
             ],
           ),
           SectionCard(
-            title: 'Filter Gambar',
-            children: [
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text(
-                  'Sensor Gambar Tidak Pantas',
-                  style: AppTextStyles.textReguler,
-                ),
-                subtitle: Text(
-                  'Aktifkan filter gambar yang tidak pantas',
-                  style: AppTextStyles.description,
-                ),
-                trailing: Switch(value: true, onChanged: (v) {}),
-              ),
-              const SizedBox(height: 12),
-              Container(
-                decoration: BoxDecoration(
-                  color: AppColors.greenSoft,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 12,
-                  horizontal: 16,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('247 Gambar Difilter', style: AppTextStyles.textReguler),
-                    Text(
-                      '95,8% Akurasi Filter',
-                      style: AppTextStyles.textReguler.copyWith(
-                        color: AppColors.primary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+  title: "Filter Gambar",
+  iconPath: "assets/images/shield.png",
+  children: [
+    const FilterImageToggleItem(isOn: true),
+    const SizedBox(height: 16),
+    Row(
+      children: [
+        _statBox("247", "Gambar Diblur"),
+        const SizedBox(width: 12),
+        _statBox("95,8%", "Akurasi Filter"),
+      ],
+    ),
+  ],
+),
+
         ],
       ),
     );
   }
 
-  Widget _appItemWithImage(
-    String imageName,
-    String appName,
-    String status,
-    bool isBlocked,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        children: [
-          Image.asset('assets/images/$imageName', width: 32, height: 32),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(appName, style: AppTextStyles.textReguler),
-                Text(
-                  status,
-                  style: isBlocked
-                      ? AppTextStyles.description.copyWith(
-                          color: AppColors.deleteRed,
-                        )
-                      : AppTextStyles.description,
-                ),
-              ],
-            ),
-          ),
-          Switch(value: isBlocked, onChanged: (v) {}),
-        ],
-      ),
-    );
-  }
-
-  Widget _switchItem(String title, String subtitle, bool value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        children: [
-          Image.asset('assets/images/lock.png', width: 24, height: 24),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title, style: AppTextStyles.textReguler),
-                Text(subtitle, style: AppTextStyles.description),
-              ],
-            ),
-          ),
-          Switch(value: value, onChanged: (v) {}),
-        ],
-      ),
-    );
-  }
-
-  Widget _addButton(String label, VoidCallback onPressed) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16),
-      child: ElevatedButton(
+  Widget _addButton(String label) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(top: 12),
+      child: ElevatedButton.icon(
+        onPressed: () {},
+        icon: const Icon(Icons.add, color: Colors.white),
+        label: Text(label, style: AppTextStyles.addButton),
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
+          padding: const EdgeInsets.symmetric(vertical: 10),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(24),
           ),
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          elevation: 0,
         ),
-        onPressed: onPressed,
-        child: Text(label, style: AppTextStyles.textWhite),
       ),
     );
   }
+
+  Widget _appItem(
+    String title,
+    String iconPath,
+    String badge,
+    String category,
+    bool isBlocked,
+  ) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppColors.greySoft,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset(
+              iconPath,
+              width: 38,
+              height: 38,
+              fit: BoxFit.cover,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: AppTextStyles.itemTitle),
+                const SizedBox(height: 4),
+                Text(category, style: AppTextStyles.categoryLabel),
+              ],
+            ),
+          ),
+          Row(
+            children: [
+              _badgeLabel(badge),
+              const SizedBox(width: 8),
+              _customSwitch(isBlocked),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _customSwitch(bool value) {
+    return Transform.scale(
+      scale: 0.9,
+      child: Switch(
+        value: value,
+        onChanged: (_) {},
+        activeColor: Colors.white,
+        activeTrackColor: AppColors.primary,
+        inactiveThumbColor: Colors.white,
+        inactiveTrackColor: Colors.grey.shade400,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      ),
+    );
+  }
+
+  Widget _allItem(String title, String description, bool isBlocked) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppColors.greySoft, // abu-abu terang
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: AppTextStyles.itemTitle),
+                const SizedBox(height: 4),
+                Text(description, style: AppTextStyles.categoryLabel),
+              ],
+            ),
+          ),
+          Row(
+            children: [
+              _badgeLabel("Diblokir"),
+              const SizedBox(width: 8),
+              _customSwitch(isBlocked),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _badgeLabel(String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      decoration: BoxDecoration(
+        color: AppColors.redSoft,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Text(text, style: AppTextStyles.badgeText),
+    );
+  }
+}
+
+Widget _statBox(String value, String label) {
+  return Expanded(
+    child: Container(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(
+        color: AppColors.greySoft,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        children: [
+          Text(value, style: AppTextStyles.itemTitle.copyWith(fontSize: 20)),
+          const SizedBox(height: 4),
+          Text(label, style: AppTextStyles.categoryLabel),
+        ],
+      ),
+    ),
+  );
 }

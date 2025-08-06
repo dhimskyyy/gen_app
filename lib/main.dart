@@ -11,6 +11,7 @@ import 'linked_screen/step_connect_device.dart';
 import 'linked_screen/step_success.dart';
 import 'theme/app_colors.dart';
 import 'location/location_screen.dart';
+import 'blocking/screens/blocking_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/step_connect_device': (context) => const StepConnectDevice(),
         '/step_success': (context) => const StepSuccess(),
         '/location': (context) => const LocationScreen(),
+        '/blocking': (context) => const BlockingScreen(),
       },
     );
   }
