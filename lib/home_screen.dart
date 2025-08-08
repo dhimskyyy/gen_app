@@ -307,8 +307,10 @@ class HomeScreen extends StatelessWidget {
                         _MainMenuCard(
                           title: "Pembatasan Waktu",
                           iconPath: 'assets/icons/time_limit_icon.png',
-                          backgroundColor: Color(0xFFF57C2B),
+                          backgroundColor: const Color(0xFFF57C2B),
                           textColor: Colors.white,
+                          onTap: () =>
+                              Navigator.pushNamed(context, '/timelimit'),
                         ),
                       ],
                     ),

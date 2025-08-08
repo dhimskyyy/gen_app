@@ -74,7 +74,7 @@ class TimeLimitScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Slider(
-                  value: 3,
+                  value: 3.0, // ✅ FIX: harus double
                   min: 0.5,
                   max: 8,
                   divisions: 15,
