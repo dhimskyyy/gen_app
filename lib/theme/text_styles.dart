@@ -81,7 +81,7 @@ class AppTextStyles {
 
   static const categoryLabel = TextStyle(
     fontSize: 12,
-    color: Color.fromARGB(255, 0, 0, 0),
+    color: AppColors.black,
   );
 
   static const badgeText = TextStyle(

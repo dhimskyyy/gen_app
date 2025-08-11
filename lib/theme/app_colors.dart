@@ -13,6 +13,7 @@ class AppColors {
   static const Color greySoft = Color.fromARGB(107, 185, 187, 186);
   static const Color yellowSoft = Color(0xFFFFF7E3); // kuning pastel
   static const Color redSoft = Color(0xFFFFE4E1); // merah pastel
+  static const Color deadline = Color.fromARGB(255, 233, 87, 42);
 
   // Shadow Soft (5% opacity)
   static const Color shadowSoft = Color(0x0D000000);

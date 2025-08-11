@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
 
-class TimeLimitScreen extends StatelessWidget {
+class TimeLimitScreen extends StatefulWidget {
   const TimeLimitScreen({super.key});
 
+  @override
+  State<TimeLimitScreen> createState() => _TimeLimitScreenState();
+}
+
+class _TimeLimitScreenState extends State<TimeLimitScreen> {
+  double _dailyLimitHours = 3.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.primary,
+        backgroundColor: AppColors.deadline,
         foregroundColor: AppColors.white,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,61 +48,108 @@ class TimeLimitScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDailyLimitSection() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(color: AppColors.shadowSoft, blurRadius: 4)],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Image.asset('assets/icons/redclock.png', width: 20),
-              const SizedBox(width: 8),
-              Text('Batas Waktu Harian', style: AppTextStyles.sectionTitle),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Center(
-            child: Column(
-              children: [
-                Text('3 Jam', style: AppTextStyles.zone),
-                const SizedBox(height: 4),
-                Text(
-                  'Maksimal penggunaan internet per hari',
-                  style: AppTextStyles.description.copyWith(
-                    color: AppColors.greySoft,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Slider(
-                  value: 3.0, // ✅ FIX: harus double
-                  min: 0.5,
-                  max: 8,
-                  divisions: 15,
-                  onChanged: (_) {},
-                  activeColor: AppColors.primary,
-                ),
-                Text('3 Jam', style: AppTextStyles.textReguler),
-              ],
-            ),
-          ),
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildTimeBox('2j 15m', 'Sudah Digunakan', AppColors.deleteRed),
-              _buildTimeBox('2:47', 'Sisa Waktu', AppColors.greenSoft),
-            ],
-          ),
-        ],
-      ),
-    );
+String _formatHours(double hours) {
+  if (hours >= 8.0) return '8 Jam'; // Kasus maksimal
+  if (hours <= 0.5) return '30 Menit'; // Kasus minimal
+
+  int totalMinutes = (hours * 60).round();
+  int h = totalMinutes ~/ 60; // Mendapatkan jam
+  int m = totalMinutes % 60;  // Mendapatkan sisa menit
+
+  if (h > 0 && m > 0) {
+    return '$h Jam $m Menit';
+  } else if (h > 0) {
+    return '$h Jam';
+  } else {
+    return '$m Menit';
   }
+}
+
+  Widget _buildDailyLimitSection() {
+  return Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: AppColors.white,
+      borderRadius: BorderRadius.circular(12),
+      boxShadow: [BoxShadow(color: AppColors.shadowSoft, blurRadius: 4)],
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Image.asset('assets/icons/redclock.png', width: 18),
+            const SizedBox(width: 8),
+            Text(
+              'Batas Waktu Harian',
+              style: AppTextStyles.textReguler.copyWith(fontWeight: FontWeight.w400),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Center(
+          child: Column(
+            children: [
+              Text(
+                _formatHours(_dailyLimitHours),
+                style: AppTextStyles.textReguler.copyWith(
+                  color: AppColors.deadline,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'Maksimal penggunaan internet per hari',
+                style: AppTextStyles.textReguler,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('30 menit', style: AppTextStyles.textReguler.copyWith(fontSize: 12)),
+                    Text('8 Jam', style: AppTextStyles.textReguler.copyWith(fontSize: 12)),
+                  ],
+                ),
+              ),
+              Slider(
+                // PERUBAHAN 2: Gunakan variabel state sebagai nilai slider
+                value: _dailyLimitHours,
+                min: 0.5, // 30 menit
+                max: 8,   // 8 jam
+                divisions: 15, // (8 jam - 0.5 jam) / 30 menit = 7.5 / 0.5 = 15 langkah
+                onChanged: (double newValue) {
+                  // PERUBAHAN 3: Panggil setState untuk memperbarui nilai dan UI
+                  setState(() {
+                    _dailyLimitHours = newValue;
+                  });
+                },
+                activeColor: AppColors.primary,
+                inactiveColor: AppColors.greySoft,
+              ),
+              Text(
+                // PERUBAHAN 4: Tampilkan juga nilai terbaru di bawah slider
+                _formatHours(_dailyLimitHours),
+                style: AppTextStyles.textReguler
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildTimeBox('2j 15m', 'Sudah Digunakan', AppColors.deleteRed),
+            _buildTimeBox('247', 'Sisa Waktu', AppColors.greenSoft),
+          ],
+        ),
+      ],
+    ),
+  );
+}
 
   Widget _buildWeeklyScheduleSection() {
     return Container(
@@ -223,22 +276,28 @@ class TimeLimitScreen extends StatelessWidget {
   }
 
   Widget _buildTimeBox(String time, String label, Color color) {
-    return Container(
-      width: 130,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        border: Border.all(color: color),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        children: [
-          Text(time, style: AppTextStyles.zone.copyWith(color: color)),
-          const SizedBox(height: 4),
-          Text(label, style: AppTextStyles.subtitle),
-        ],
-      ),
-    );
-  }
+  return Container(
+    width: 150,
+    padding: const EdgeInsets.symmetric(vertical: 12),
+    decoration: BoxDecoration(
+      color: color.withOpacity(0.1),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: Column(
+      children: [
+        Text(
+          time,
+          style: AppTextStyles.titleAppBar.copyWith(
+            fontWeight: FontWeight.bold,
+            color: color,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(label, style: AppTextStyles.categoryLabel),
+      ],
+    ),
+  );
+}
 
   Widget _buildScheduleItem(String title, String timeRange, bool isActive) {
     return Container(
@@ -275,7 +334,7 @@ class TimeLimitScreen extends StatelessWidget {
   ) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: Image.asset('assets/icons/$iconFile', width: 32),
+      leading: Image.asset('assets/images/$iconFile', width: 32),
       title: Text(appName, style: AppTextStyles.itemTitle),
       subtitle: Text('Digunakan: $used', style: AppTextStyles.categoryLabel),
       trailing: Text(
