@@ -2,8 +2,73 @@ import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
 
-class LocationScreen extends StatelessWidget {
+class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});
+
+  @override
+  State<LocationScreen> createState() => _LocationScreenState();
+}
+
+class _LocationScreenState extends State<LocationScreen> {
+  late final ScrollController _scrollController;
+  double _scrollProgress = 0.0;
+
+  final List<Map<String, dynamic>> _safeZoneData = [
+    {
+      'title': 'Rumah',
+      'address': 'Jl. Mawar No.123',
+      'iconFile': 'home.png',
+      'isActive': true,
+    },
+    {
+      'title': 'Sekolah (SMP Negeri 5)',
+      'address': 'Jl. Kartini No.123',
+      'iconFile': 'school.png',
+      'isActive': true,
+    },
+    {
+      'title': 'Rumah Nenek',
+      'address': 'Jl. Melati No.123',
+      'iconFile': 'home.png',
+      'isActive': false,
+    },
+  ];
+
+  final List<Map<String, dynamic>> _notificationData = [
+    {
+      'title': 'Baterai Lemah',
+      'subtitle': 'Notifikasi saat baterai <20%',
+      'isActive': true,
+      'bgColor': AppColors.yellowSoft,
+    },
+    {
+      'title': 'Keluar Zona Aman',
+      'subtitle': 'Peringatan ketika keluar zona aman',
+      'isActive': true,
+      'bgColor': AppColors.redSoft,
+    }
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (mounted) {
+        final maxScroll = _scrollController.position.maxScrollExtent;
+        final currentScroll = _scrollController.position.pixels;
+        setState(() {
+          _scrollProgress = (maxScroll > 0) ? currentScroll / maxScroll : 0;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +77,7 @@ class LocationScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.greenSoft,
         elevation: 0,
-        toolbarHeight: 90,
+        toolbarHeight: 70,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
@@ -70,7 +135,7 @@ class LocationScreen extends StatelessWidget {
           Row(
             children: [
               Image.asset('assets/icons/map_pin.png', width: 18),
-              const SizedBox(width: 6),
+              const SizedBox(width: 8),
               Text('Lokasi Saat ini', style: AppTextStyles.textReguler),
             ],
           ),
@@ -87,11 +152,11 @@ class LocationScreen extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 25, 
-                left: 195, 
+                top: 25,
+                left: 195,
                 child: Image.asset(
                   'assets/icons/Vector.png',
-                  width: 32, // Sesuaikan ukuran icon
+                  width: 32,
                 ),
               ),
             ],
@@ -108,9 +173,13 @@ class LocationScreen extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 12),
               ),
-              icon: Image.asset('assets/icons/point_icon.png', width: 20),
-              label: Text('Buka Peta Lengkap', style: AppTextStyles.textWhite),
+              icon: Image.asset('assets/icons/point_icon.png', width: 16),
+              label: Text(
+                'Buka Peta Lengkap',
+                style: AppTextStyles.textWhite.copyWith(fontWeight: FontWeight.bold),
+              ),
             ),
+            
           ),
         ],
       ),
@@ -118,94 +187,80 @@ class LocationScreen extends StatelessWidget {
   }
 
   Widget _locationHistorySection() {
-    final ScrollController _scrollController = ScrollController();
-
-    return StatefulBuilder(
-      builder: (context, setState) {
-        double scrollProgress = 0;
-
-        _scrollController.addListener(() {
-          final maxScroll = _scrollController.position.maxScrollExtent;
-          final currentScroll = _scrollController.position.pixels;
-          setState(() {
-            scrollProgress = (maxScroll == 0) ? 0 : currentScroll / maxScroll;
-          });
-        });
-
-        return Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.shadowSoft,
-                blurRadius: 6,
-                offset: const Offset(0, 2),
-              ),
-            ],
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.shadowSoft,
+            blurRadius: 6,
+            offset: const Offset(0, 2),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  Image.asset('assets/icons/clock.png', width: 18, height: 18),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Riwayat Lokasi Hari Ini',
-                    style: AppTextStyles.textReguler.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              SizedBox(
-                height: 100,
-                child: ListView(
-                  controller: _scrollController,
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    _historyItem('06:30', 'Rumah', AppColors.greenSoft),
-                    _historyItem('07:15', 'Jalan Raya', AppColors.orangeSoft),
-                    _historyItem('07:30', 'SMP Negeri 5', AppColors.greenSoft),
-                    _historyItem('14:15', 'Jalan Raya', AppColors.orangeSoft),
-                    _historyItem('16:00', 'Rumah Nenek', AppColors.greenSoft),
-                  ],
+              Image.asset('assets/icons/clock.png', width: 18, height: 18),
+              const SizedBox(width: 8),
+              Text(
+                'Riwayat Lokasi Hari Ini',
+                style: AppTextStyles.textReguler.copyWith(
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 8),
-              // Scroll progress bar
-              LayoutBuilder(
-                builder: (context, constraints) {
-                  return Stack(
-                    children: [
-                      Container(
-                        height: 4,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: AppColors.lightGrey,
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                      ),
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 100),
-                        height: 4,
-                        width: constraints.maxWidth * scrollProgress,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
             ],
           ),
-        );
-      },
+          const SizedBox(height: 12),
+          SizedBox(
+            height: 100,
+            child: ListView(
+              controller: _scrollController,
+              scrollDirection: Axis.horizontal,
+              children: [
+                _historyItem('06:30', 'Rumah', AppColors.greenSoft),
+                _historyItem('07:15', 'Jalan Raya', AppColors.orangeSoft),
+                _historyItem('07:30', 'SMP Negeri 5', AppColors.greenSoft),
+                _historyItem('14:15', 'Jalan Raya', AppColors.orangeSoft),
+                _historyItem('16:00', 'Rumah Nenek', AppColors.greenSoft),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return Stack(
+                  children: [
+                    Container(
+                      height: 4,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 100),
+                      height: 5,
+                      width: constraints.maxWidth * _scrollProgress,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[500],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -255,13 +310,13 @@ class LocationScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: AppColors.shadowSoft,
-            blurRadius: 6,
-            offset: const Offset(0, 2),
+            color: Colors.grey.withOpacity(0.15),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -270,104 +325,49 @@ class LocationScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset('assets/icons/shield.png', width: 18),
-              const SizedBox(width: 6),
-              Text('Zona Aman', style: AppTextStyles.textReguler),
+              const Icon(Icons.shield_outlined, color: Colors.purple, size: 20),
+              const SizedBox(width: 8),
+              Text(
+                'Zona Aman',
+                style: AppTextStyles.textReguler,
+              ),
             ],
           ),
-          const SizedBox(height: 16),
-          _safeZoneItem(
-            title: 'Rumah',
-            address: 'Jl. Mawar No.123',
-            active: true,
-            iconFile: 'home.png',
-          ),
           const SizedBox(height: 12),
-          _safeZoneItem(
-            title: 'Sekolah (SMP Negeri 5)',
-            address: 'Jl. Kartini No.123',
-            active: true,
-            iconFile: 'school.png',
+          ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: _safeZoneData.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 12),
+            itemBuilder: (context, index) {
+              final item = _safeZoneData[index];
+              return _SafeZoneItem(
+                title: item['title'],
+                address: item['address'],
+                iconFile: item['iconFile'],
+                initialIsActive: item['isActive'],
+              );
+            },
           ),
-          const SizedBox(height: 12),
-          _safeZoneItem(
-            title: 'Rumah Nenek',
-            address: 'Jl. Melati No.123',
-            active: false,
-            iconFile: 'home.png',
-          ),
-          const SizedBox(height: 20),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: () {},
-              icon: const Icon(Icons.add, color: Colors.white),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(28),
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 12),
+              ),
+              icon: const Icon(Icons.add, color: Colors.white, size: 20),
               label: Text(
                 'Tambahkan Zona Aman Baru',
                 style: AppTextStyles.textWhite.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(28),
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 14),
-              ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _safeZoneItem({
-    required String title,
-    required String address,
-    required bool active,
-    required String iconFile,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF5F6FA), // Abu-abu soft sesuai desain Figma
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Image.asset('assets/icons/$iconFile', width: 24),
-              const SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: AppTextStyles.textReguler.copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    address,
-                    style: AppTextStyles.description.copyWith(
-                      fontSize: 12,
-                      color: AppColors.black, // Ubah jadi hitam
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Switch(
-            value: active,
-            onChanged: (_) {},
-            activeColor: AppColors.primary,
           ),
         ],
       ),
@@ -394,39 +394,144 @@ class LocationScreen extends StatelessWidget {
           Row(
             children: [
               Image.asset('assets/icons/shield.png', width: 18),
-              const SizedBox(width: 6),
+              const SizedBox(width: 8),
               Text('Pengaturan Notifikasi', style: AppTextStyles.textReguler),
             ],
           ),
-          const SizedBox(height: 16),
-          _notificationItem(
-            title: 'Baterai Lemah',
-            subtitle: 'Notifikasi saat baterai <20%',
-            isActive: true,
-            bgColor: AppColors.yellowSoft,
-          ),
           const SizedBox(height: 12),
-          _notificationItem(
-            title: 'Keluar Zona Aman',
-            subtitle: 'Peringatan ketika keluar zona aman',
-            isActive: true,
-            bgColor: AppColors.redSoft,
+          ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: _notificationData.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 12),
+            itemBuilder: (context, index) {
+              final item = _notificationData[index];
+              return _NotificationItem(
+                title: item['title'],
+                subtitle: item['subtitle'],
+                initialIsActive: item['isActive'],
+                bgColor: item['bgColor'],
+              );
+            },
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _notificationItem({
-    required String title,
-    required String subtitle,
-    required bool isActive,
-    required Color bgColor,
-  }) {
+class _SafeZoneItem extends StatefulWidget {
+  final String title;
+  final String address;
+  final String iconFile;
+  final bool initialIsActive;
+
+  const _SafeZoneItem({
+    required this.title,
+    required this.address,
+    required this.iconFile,
+    required this.initialIsActive,
+  });
+
+  @override
+  State<_SafeZoneItem> createState() => __SafeZoneItemState();
+}
+
+class __SafeZoneItemState extends State<_SafeZoneItem> {
+  late bool _isActive;
+
+  @override
+  void initState() {
+    super.initState();
+    _isActive = widget.initialIsActive;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    IconData iconData = widget.iconFile == 'home.png'
+        ? Icons.home_outlined
+        : Icons.school_outlined;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF5F6FA),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          Icon(iconData, color: Colors.black54, size: 28),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.title,
+                  style: AppTextStyles.textReguler.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  widget.address,
+                  style: AppTextStyles.description.copyWith(
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Switch(
+            value: _isActive,
+            onChanged: (bool value) {
+              setState(() {
+                _isActive = value;
+              });
+            },
+            activeTrackColor: const Color(0xFF4A80F0),
+            activeColor: Colors.white,
+            inactiveTrackColor: Colors.grey.shade300,
+            inactiveThumbColor: Colors.white,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _NotificationItem extends StatefulWidget {
+  final String title;
+  final String subtitle;
+  final bool initialIsActive;
+  final Color bgColor;
+
+  const _NotificationItem({
+    required this.title,
+    required this.subtitle,
+    required this.initialIsActive,
+    required this.bgColor,
+  });
+
+  @override
+  State<_NotificationItem> createState() => _NotificationItemState();
+}
+
+class _NotificationItemState extends State<_NotificationItem> {
+  late bool _isActive;
+
+  @override
+  void initState() {
+    super.initState();
+    _isActive = widget.initialIsActive;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       decoration: BoxDecoration(
-        color: bgColor,
+        color: widget.bgColor,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -436,16 +541,23 @@ class LocationScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: AppTextStyles.textReguler),
+                Text(widget.title, style: AppTextStyles.textReguler),
                 const SizedBox(height: 4),
-                Text(subtitle, style: AppTextStyles.description),
+                Text(widget.subtitle, style: AppTextStyles.description),
               ],
             ),
           ),
           Switch(
-            value: isActive,
-            onChanged: (_) {},
-            activeColor: AppColors.primary,
+            value: _isActive,
+            onChanged: (bool value) {
+              setState(() {
+                _isActive = value;
+              });
+            },
+            activeTrackColor: const Color(0xFF4A80F0),
+            activeColor: Colors.white,
+            inactiveTrackColor: Colors.grey.shade300,
+            inactiveThumbColor: Colors.white,
           ),
         ],
       ),

@@ -49,12 +49,12 @@ class _TimeLimitScreenState extends State<TimeLimitScreen> {
   }
 
 String _formatHours(double hours) {
-  if (hours >= 8.0) return '8 Jam'; // Kasus maksimal
-  if (hours <= 0.5) return '30 Menit'; // Kasus minimal
+  if (hours >= 8.0) return '8 Jam';
+  if (hours <= 0.5) return '30 Menit';
 
   int totalMinutes = (hours * 60).round();
-  int h = totalMinutes ~/ 60; // Mendapatkan jam
-  int m = totalMinutes % 60;  // Mendapatkan sisa menit
+  int h = totalMinutes ~/ 60;
+  int m = totalMinutes % 60;
 
   if (h > 0 && m > 0) {
     return '$h Jam $m Menit';
@@ -116,13 +116,11 @@ String _formatHours(double hours) {
                 ),
               ),
               Slider(
-                // PERUBAHAN 2: Gunakan variabel state sebagai nilai slider
                 value: _dailyLimitHours,
-                min: 0.5, // 30 menit
-                max: 8,   // 8 jam
-                divisions: 15, // (8 jam - 0.5 jam) / 30 menit = 7.5 / 0.5 = 15 langkah
+                min: 0.5,
+                max: 8,
+                divisions: 15,
                 onChanged: (double newValue) {
-                  // PERUBAHAN 3: Panggil setState untuk memperbarui nilai dan UI
                   setState(() {
                     _dailyLimitHours = newValue;
                   });
@@ -131,7 +129,6 @@ String _formatHours(double hours) {
                 inactiveColor: AppColors.greySoft,
               ),
               Text(
-                // PERUBAHAN 4: Tampilkan juga nilai terbaru di bawah slider
                 _formatHours(_dailyLimitHours),
                 style: AppTextStyles.textReguler
               ),
