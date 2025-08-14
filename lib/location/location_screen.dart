@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
+import 'widgets/safe_zone_list.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});
@@ -46,7 +47,7 @@ class _LocationScreenState extends State<LocationScreen> {
       'subtitle': 'Peringatan ketika keluar zona aman',
       'isActive': true,
       'bgColor': AppColors.redSoft,
-    }
+    },
   ];
 
   @override
@@ -154,10 +155,7 @@ class _LocationScreenState extends State<LocationScreen> {
               Positioned(
                 top: 25,
                 left: 195,
-                child: Image.asset(
-                  'assets/icons/Vector.png',
-                  width: 32,
-                ),
+                child: Image.asset('assets/icons/Vector.png', width: 32),
               ),
             ],
           ),
@@ -176,10 +174,11 @@ class _LocationScreenState extends State<LocationScreen> {
               icon: Image.asset('assets/icons/point_icon.png', width: 16),
               label: Text(
                 'Buka Peta Lengkap',
-                style: AppTextStyles.textWhite.copyWith(fontWeight: FontWeight.bold),
+                style: AppTextStyles.textWhite.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            
           ),
         ],
       ),
@@ -327,10 +326,7 @@ class _LocationScreenState extends State<LocationScreen> {
             children: [
               const Icon(Icons.shield_outlined, color: Colors.purple, size: 20),
               const SizedBox(width: 8),
-              Text(
-                'Zona Aman',
-                style: AppTextStyles.textReguler,
-              ),
+              Text('Zona Aman', style: AppTextStyles.textReguler),
             ],
           ),
           const SizedBox(height: 12),
@@ -352,7 +348,12 @@ class _LocationScreenState extends State<LocationScreen> {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SafeZoneList()),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 shape: RoundedRectangleBorder(

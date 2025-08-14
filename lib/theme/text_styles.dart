@@ -11,7 +11,6 @@ class AppTextStyles {
     color: AppColors.black,
   );
 
-
   static const TextStyle terms = TextStyle(fontSize: 12, color: AppColors.black, fontWeight: FontWeight.w400);
 
   static const TextStyle textBlue = TextStyle(

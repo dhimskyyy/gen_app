@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
+import '../add_safe_zone_screen.dart';
 
 class SafeZoneList extends StatefulWidget {
   const SafeZoneList({super.key});
@@ -14,13 +15,24 @@ class _SafeZoneListState extends State<SafeZoneList> {
   int selectedDeleteIndex = -1;
 
   final List<Map<String, dynamic>> safeZones = [
-    {'title': 'Rumah', 'address': 'Jl. Mawar No.123', 'isActive': true},
+    {
+      'title': 'Rumah',
+      'address': 'Jl. Mawar No.123',
+      'iconFile': 'home.png',
+      'isActive': true,
+    },
     {
       'title': 'Sekolah (SMP Negeri 5)',
       'address': 'Jl. Kartini No.123',
+      'iconFile': 'school.png',
       'isActive': true,
     },
-    {'title': 'Rumah Nenek', 'address': 'Jl. Melati No.123', 'isActive': false},
+    {
+      'title': 'Rumah Nenek',
+      'address': 'Jl. Melati No.123',
+      'iconFile': 'home.png',
+      'isActive': false,
+    },
   ];
 
   void showDeleteDialog(int index) {
@@ -47,7 +59,6 @@ class _SafeZoneListState extends State<SafeZoneList> {
         elevation: 0,
         centerTitle: true,
         title: Text('Zona Aman', style: AppTextStyles.textReguler),
-        automaticallyImplyLeading: false,
       ),
       body: Stack(
         children: [
@@ -67,14 +78,12 @@ class _SafeZoneListState extends State<SafeZoneList> {
                         children: [
                           Row(
                             children: [
-                              Icon(
-                                Icons.location_on,
-                                size: 20,
-                                color: zone['isActive']
-                                    ? AppColors.primary
-                                    : AppColors.black,
+                              Image.asset(
+                                'assets/icons/${zone['iconFile']}', // 1. Path dibuat dinamis
+                                width: 28,
+                                height: 28,
                               ),
-                              const SizedBox(width: 8),
+                              const SizedBox(width: 12),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -94,17 +103,21 @@ class _SafeZoneListState extends State<SafeZoneList> {
                             children: [
                               Switch(
                                 value: zone['isActive'],
-                                onChanged: (_) {
+                                onChanged: (bool value) {
                                   setState(() {
-                                    zone['isActive'] = !zone['isActive'];
+                                    safeZones[index]['isActive'] = value;
                                   });
                                 },
-                                activeColor: AppColors.primary,
+                                activeTrackColor: const Color(0xFF4A80F0),
+                                activeColor: Colors.white,
+                                inactiveTrackColor: Colors.grey.shade300,
+                                inactiveThumbColor: Colors.white,
                               ),
                               IconButton(
-                                icon: Icon(
-                                  Icons.delete,
-                                  color: AppColors.black,
+                                icon: Image.asset(
+                                  'assets/icons/trash_icon.png',
+                                  width: 20,
+                                  height: 20,
                                 ),
                                 onPressed: () => showDeleteDialog(index),
                               ),
@@ -115,22 +128,30 @@ class _SafeZoneListState extends State<SafeZoneList> {
                     },
                   ),
                 ),
-                const SizedBox(height: 16),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.add, size: 18, color: Colors.white),
-                    label: Text(
-                      'Tambahkan Zona Aman Baru',
-                      style: AppTextStyles.textWhite,
-                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddSafeZoneScreen(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(28),
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    icon: const Icon(Icons.add, color: Colors.white, size: 20),
+                    label: Text(
+                      'Tambahkan Zona Aman Baru',
+                      style: AppTextStyles.textWhite.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
