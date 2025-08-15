@@ -3,6 +3,7 @@ import '../theme/app_colors.dart';
 import '../theme/text_styles.dart';
 import 'widgets/notification_item.dart';
 import 'widgets/request_item.dart';
+import '../bottom_nav.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -40,6 +41,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: CustomBottomNavBar(
+        currentIndex: 2, // index aktif
+        onTap: (index) {
+          print("Navigasi ke index: $index");
+        },
       ),
     );
   }

@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Header
           Container(
             height: 180,
             decoration: const BoxDecoration(
@@ -89,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 42),
 
                     // CARD PUTIH
                     Container(

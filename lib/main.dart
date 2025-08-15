@@ -13,6 +13,7 @@ import 'theme/app_colors.dart';
 import 'location/location_screen.dart';
 import 'blocking/screens/blocking_screen.dart';
 import 'timelimit/timelimit_screen.dart';
+import 'profile/profile_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         '/location': (context) => const LocationScreen(),
         '/blocking': (context) => const BlockingScreen(),
         '/timelimit': (context) => const TimeLimitScreen(),
+        '/profile': (context) => const ProfileScreen(),
       },
     );
   }

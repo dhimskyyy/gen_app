@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
+import '../bottom_nav.dart';
 
 class ActionScreen extends StatefulWidget {
   const ActionScreen({super.key});
@@ -64,6 +65,12 @@ class _ActionScreenState extends State<ActionScreen> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: CustomBottomNavBar(
+        currentIndex: 1, // index aktif
+        onTap: (index) {
+          print("Navigasi ke index: $index");
+        },
       ),
     );
   }
