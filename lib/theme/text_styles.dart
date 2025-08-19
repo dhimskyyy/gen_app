@@ -85,7 +85,7 @@ class AppTextStyles {
 
   static const badgeText = TextStyle(
     fontSize: 12,
-    color: Colors.white,
+    color: AppColors.deadLine,
     fontWeight: FontWeight.w500,
   );
 
