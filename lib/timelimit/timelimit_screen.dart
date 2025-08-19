@@ -16,7 +16,7 @@ class _TimeLimitScreenState extends State<TimeLimitScreen> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.deadline,
+        backgroundColor: AppColors.deadLine,
         foregroundColor: AppColors.white,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +93,7 @@ String _formatHours(double hours) {
               Text(
                 _formatHours(_dailyLimitHours),
                 style: AppTextStyles.textReguler.copyWith(
-                  color: AppColors.deadline,
+                  color: AppColors.deadLine,
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                 ),

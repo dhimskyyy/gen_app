@@ -186,7 +186,7 @@ class HomeScreen extends StatelessWidget {
                                     color: const Color(0xFFEAF3FF),
                                     borderRadius: BorderRadius.circular(12),
                                     border: Border.all(
-                                      color: const Color(0xFF4D9FFF),
+                                      color: AppColors.primary,
                                       width: 1,
                                     ),
                                   ),
@@ -196,7 +196,7 @@ class HomeScreen extends StatelessWidget {
                                     children: const [
                                       Icon(
                                         Icons.location_on_outlined,
-                                        color: Colors.blue,
+                                        color: AppColors.primary,
                                       ),
                                       SizedBox(height: 4),
                                       Text(
@@ -242,7 +242,7 @@ class HomeScreen extends StatelessWidget {
                                   iconPath: 'assets/icons/phone_icon.png',
                                   title: "Sedang dibuka",
                                   value: "WhatsApp",
-                                  valueColor: Color(0xFF2C74F2),
+                                  valueColor: AppColors.primary,
                                 ),
                               ),
                               SizedBox(width: 12),
@@ -284,7 +284,7 @@ class HomeScreen extends StatelessWidget {
                         _MainMenuCard(
                           title: "Lacak Lokasi",
                           iconPath: 'assets/icons/location_icon.png',
-                          backgroundColor: Color(0xFF21C162),
+                          backgroundColor: AppColors.greenSoft,
                           textColor: Colors.white,
                           onTap: () =>
                               Navigator.pushNamed(context, '/location'),
@@ -298,7 +298,7 @@ class HomeScreen extends StatelessWidget {
                         _MainMenuCard(
                           title: "Pemblokiran",
                           iconPath: 'assets/icons/block_icon.png',
-                          backgroundColor: Color(0xFFE94135),
+                          backgroundColor: AppColors.deadLine,
                           textColor: Colors.white,
                           onTap: () =>
                               Navigator.pushNamed(context, '/blocking'),
@@ -306,14 +306,13 @@ class HomeScreen extends StatelessWidget {
                         _MainMenuCard(
                           title: "Pembatasan Waktu",
                           iconPath: 'assets/icons/time_limit_icon.png',
-                          backgroundColor: const Color(0xFFF57C2B),
+                          backgroundColor: AppColors.orangeSoft,
                           textColor: Colors.white,
                           onTap: () =>
                               Navigator.pushNamed(context, '/timelimit'),
                         ),
                       ],
                     ),
-
                     const SizedBox(height: 20),
 
                     // Tombol Lihat Laporan Aktivitas
@@ -324,9 +323,8 @@ class HomeScreen extends StatelessWidget {
                           vertical: 10,
                         ),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          border: Border.all(color: Colors.grey.shade300),
-                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(color: AppColors.lightGrey),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -355,9 +353,8 @@ class HomeScreen extends StatelessWidget {
                           vertical: 10,
                         ),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: const Color(0xFFEAF1FF),
-                          border: Border.all(color: const Color(0xFF4D9FFF)),
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(color: AppColors.primary),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -371,7 +368,7 @@ class HomeScreen extends StatelessWidget {
                             const Text(
                               'Upgrade Premium',
                               style: TextStyle(
-                                color: Color(0xFF2C74F2),
+                                color: AppColors.primary,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
                               ),

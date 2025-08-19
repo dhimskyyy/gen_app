@@ -79,7 +79,7 @@ class _SafeZoneListState extends State<SafeZoneList> {
                           Row(
                             children: [
                               Image.asset(
-                                'assets/icons/${zone['iconFile']}', // 1. Path dibuat dinamis
+                                'assets/icons/${zone['iconFile']}',
                                 width: 28,
                                 height: 28,
                               ),

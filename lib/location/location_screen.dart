@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
 import 'widgets/safe_zone_list.dart';
+import 'add_safe_zone_screen.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});
@@ -77,7 +79,6 @@ class _LocationScreenState extends State<LocationScreen> {
       backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: AppColors.greenSoft,
-        elevation: 0,
         toolbarHeight: 70,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -117,73 +118,98 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   Widget _currentLocationCard() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadowSoft,
-            blurRadius: 6,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Image.asset('assets/icons/map_pin.png', width: 18),
-              const SizedBox(width: 8),
-              Text('Lokasi Saat ini', style: AppTextStyles.textReguler),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  'assets/images/Basemap.png',
-                  height: 130,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+  const LatLng _center = LatLng(-6.8898, 109.6753);
+
+  return Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: AppColors.white,
+      borderRadius: BorderRadius.circular(16),
+      boxShadow: [
+        BoxShadow(
+          color: AppColors.shadowSoft,
+          blurRadius: 6,
+          offset: const Offset(0, 2),
+        ),
+      ],
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Image.asset('assets/icons/map_pin.png', width: 18),
+            const SizedBox(width: 8),
+            Text('Lokasi Saat ini', style: AppTextStyles.textReguler),
+          ],
+        ),
+        const SizedBox(height: 12),
+
+        /// Ganti dari Image.asset ke GoogleMap
+        SizedBox(
+          height: 130,
+          width: double.infinity,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Stack(
+              children: [
+                GoogleMap(
+                  initialCameraPosition: const CameraPosition(
+                    target: _center,
+                    zoom: 14.5,
+                  ),
+                  myLocationEnabled: false,
+                  zoomControlsEnabled: false,
+                  markers: {}, // kosong, karena kita pakai custom overlay marker
                 ),
-              ),
-              Positioned(
-                top: 25,
-                left: 195,
-                child: Image.asset('assets/icons/Vector.png', width: 32),
-              ),
-            ],
+
+                /// Custom marker dari asset (Vector.png)
+                Center(
+                  child: Image.asset(
+                    'assets/icons/Vector.png',
+                    width: 32,
+                  ),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 12),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(28),
+        ),
+        const SizedBox(height: 12),
+
+        /// Tombol buka peta lengkap
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () {
+              // Navigasi ke halaman peta lengkap (AddSafeZoneScreen misalnya)
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AddSafeZoneScreen(),
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 12),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
               ),
-              icon: Image.asset('assets/icons/point_icon.png', width: 16),
-              label: Text(
-                'Buka Peta Lengkap',
-                style: AppTextStyles.textWhite.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+              padding: const EdgeInsets.symmetric(vertical: 12),
+            ),
+            icon: Image.asset('assets/icons/point_icon.png', width: 16),
+            label: Text(
+              'Buka Peta Lengkap',
+              style: AppTextStyles.textWhite.copyWith(
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
+
 
   Widget _locationHistorySection() {
     return Container(
@@ -313,7 +339,7 @@ class _LocationScreenState extends State<LocationScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.15),
+            color: const Color.fromARGB(255, 150, 37, 37).withOpacity(0.15),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -357,7 +383,7 @@ class _LocationScreenState extends State<LocationScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(28),
+                  borderRadius: BorderRadius.circular(24),
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 12),
               ),
