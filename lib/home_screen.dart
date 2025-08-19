@@ -69,23 +69,6 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Spacer(),
-                        IconButton(
-                          icon: Image.asset(
-                            'assets/icons/message_icon.png',
-                            width: 24,
-                            height: 24,
-                          ),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: Image.asset(
-                            'assets/icons/add_icon.png',
-                            width: 24,
-                            height: 24,
-                          ),
-                          onPressed: () {},
-                        ),
                       ],
                     ),
                     const SizedBox(height: 42),
