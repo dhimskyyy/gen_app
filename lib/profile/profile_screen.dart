@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gen_app/home_screen.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
 import '../bottom_nav.dart';
@@ -34,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       CircleAvatar(
-                        radius: 24,
+                        radius: 20,
                         backgroundColor: AppColors.white,
                         child: Icon(Icons.person, color: AppColors.grey),
                       ),
@@ -120,11 +119,11 @@ class ProfileScreen extends StatelessWidget {
 
           // Foto profil kecil di pojok kanan bawah di atas bottom nav
           Positioned(
-            bottom: 80, // pas di atas bottom nav
+            bottom: 50, // pas di atas bottom nav
             right: 20,
             child: CircleAvatar(
               radius: 24,
-              backgroundImage: AssetImage("assets/icons/profile_icon.png"),
+              backgroundImage: AssetImage("assets/images/cs.png"),
             ),
           ),
         ],

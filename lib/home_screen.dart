@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gen_app/theme/app_colors.dart';
+import 'package:gen_app/theme/text_styles.dart';
 import 'package:gen_app/bottom_nav.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -35,40 +36,32 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Foto profil
-                        Container(
-                          width: 34,
-                          height: 34,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: AssetImage(
-                                'assets/icons/profile_icon.png',
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
+                        CircleAvatar(
+                        radius: 20,
+                        backgroundColor: AppColors.white,
+                        child: Icon(Icons.person, color: AppColors.grey),
+                      ),
                         const SizedBox(width: 12),
-                        Column(
+                        Expanded(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Halo, Ibu Sarah",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                              style: AppTextStyles.textWhite.copyWith(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                             Text(
                               "Selamat Pagi",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.white70,
+                              style: AppTextStyles.extraSmallWhite.copyWith(
+                                color: const Color.fromRGBO(255, 255, 255, 0.8),
                               ),
                             ),
                           ],
                         ),
+                      ),
                       ],
                     ),
                     const SizedBox(height: 42),
@@ -105,11 +98,11 @@ class HomeScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              const SizedBox(width: 4),
+                              const SizedBox(width: 10),
                               Image.asset(
                                 'assets/icons/arrow_down.png',
-                                width: 16,
-                                height: 16,
+                                width: 14,
+                                height: 14,
                               ),
                             ],
                           ),

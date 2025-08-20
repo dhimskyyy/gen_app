@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import '../widgets/section_card.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
+import '../screens/app_list_screen.dart';
+import '../screens/site_list_screen.dart';
+import '../screens/keyword_list_screen.dart';
 
 class BlockingScreen extends StatelessWidget {
   const BlockingScreen({super.key});
@@ -33,53 +36,63 @@ class BlockingScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         children: [
           SectionCard(
-            title: "Blokir Aplikasi",
-            iconPath: "assets/images/shield.png",
-            children: [
-              _appItem(
-                "TikTok",
-                "assets/images/tiktok.png",
-                "Diblokir",
-                "Media Sosial",
-                true,
-              ),
-              _appItem(
-                "Mobile Legends",
-                "assets/images/mobilelegend.png",
-                "Diblokir",
-                "Game",
-                true,
-              ),
-              _appItem(
-                "WhatsApp",
-                "assets/images/whatsapp.png",
-                "Diblokir",
-                "Pesan/Call",
-                true,
-              ),
-              _addButton("Tambah Aplikasi untuk Diblokir"),
-            ],
-          ),
-          SectionCard(
-            title: "Blokir Situs Web",
-            iconPath: "assets/images/shield.png",
-            children: [
-              _allItem("Situs Dewasa", "Konten tidak pantas", true),
-              _allItem("Judi Online", "Konten tidak pantas", true),
-              _allItem("Media Sosial", "Facebook, X, dll", false),
-              _addButton("Tambah Situs untuk Diblokir"),
-            ],
-          ),
-          SectionCard(
-            title: "Blokir Kata Kunci",
-            iconPath: "assets/images/shield.png",
-            children: [
-              _allItem("Kata Kasar", "12 Kata", true),
-              _allItem("Konten Dewasa", "8 Kata", true),
-              _allItem("Kekerasan", "19 Kata", false),
-              _addButton("Tambah Kata Kunci Baru"),
-            ],
-          ),
+  title: "Blokir Aplikasi",
+  iconPath: "assets/images/shield.png",
+  children: [
+    _appItem("TikTok", "assets/images/tiktok.png", "Diblokir", "Media Sosial", true),
+    _appItem("Mobile Legends", "assets/images/mobilelegend.png", "Diblokir", "Game", true),
+    _appItem("WhatsApp", "assets/images/whatsapp.png", "Diblokir", "Pesan/Call", true),
+    _addButton(
+      context,
+      "Tambah Aplikasi untuk Diblokir",
+      () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const AppListScreen()),
+        );
+      },
+    ),
+  ],
+),
+SectionCard(
+  title: "Blokir Situs Web",
+  iconPath: "assets/images/shield.png",
+  children: [
+    _allItem("Situs Dewasa", "Konten tidak pantas", true),
+    _allItem("Judi Online", "Konten tidak pantas", true),
+    _allItem("Media Sosial", "Facebook, X, dll", false),
+    _addButton(
+      context,
+      "Tambah Situs untuk Diblokir",
+      () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const SiteListScreen()),
+        );
+      },
+    ),
+  ],
+),
+SectionCard(
+  title: "Blokir Kata Kunci",
+  iconPath: "assets/images/shield.png",
+  children: [
+    _allItem("Kata Kasar", "12 Kata", true),
+    _allItem("Konten Dewasa", "8 Kata", true),
+    _allItem("Kekerasan", "19 Kata", false),
+    _addButton(
+      context,
+      "Tambah Kata Kunci Baru",
+      () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const KeywordListScreen()),
+        );
+      },
+    ),
+  ],
+),
+
           SectionCard(
             title: "Filter Gambar",
             iconPath: "assets/images/shield.png",
@@ -100,27 +113,28 @@ class BlockingScreen extends StatelessWidget {
     );
   }
 
-  /// === HELPER WIDGETS ===
-
-  static Widget _addButton(String label) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.only(top: 12),
-      child: ElevatedButton.icon(
-        onPressed: () {},
-        icon: const Icon(Icons.add, color: Colors.white),
-        label: Text(label, style: AppTextStyles.addButton),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-          elevation: 0,
+/// === HELPER WIDGETS ===
+static Widget _addButton(BuildContext context, String label, VoidCallback onPressed) {
+  return Container(
+    width: double.infinity,
+    margin: const EdgeInsets.only(top: 12),
+    child: ElevatedButton.icon(
+      onPressed: onPressed,
+      icon: const Icon(Icons.add, color: Colors.white),
+      label: Text(label, style: AppTextStyles.addButton),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
         ),
+        elevation: 0,
       ),
-    );
-  }
+    ),
+  );
+}
+
+
 
   static Widget _appItem(
     String title,

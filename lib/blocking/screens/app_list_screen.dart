@@ -56,7 +56,7 @@ class _AppListScreenState extends State<AppListScreen> {
     ),
     AppModel(
       name: 'File Manager',
-      iconPath: 'assets/images/filemanager.png',
+      iconPath: 'assets/images/file.png', 
       isBlocked: false,
     ),
     AppModel(

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
-import '../widgets/section_card.dart';
-import '../widgets/site_list_item.dart';
 import '../widgets/add_site_dialog.dart';
 
 class SiteListScreen extends StatefulWidget {
@@ -13,26 +11,16 @@ class SiteListScreen extends StatefulWidget {
 }
 
 class _SiteListScreenState extends State<SiteListScreen> {
-  final List<String> _blockedSites = [
-    'https://shopee.co.id',
-    'https://tokopedia.co.id',
-  ];
-
-  final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = '';
+  final List<String> _blockedSites = [];
+  final TextEditingController _categoryController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    List<String> filteredSites = _blockedSites
-        .where(
-          (site) => site.toLowerCase().contains(_searchQuery.toLowerCase()),
-        )
-        .toList();
-
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: AppColors.white,
+        elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: AppColors.black),
           onPressed: () => Navigator.pop(context),
@@ -40,75 +28,97 @@ class _SiteListScreenState extends State<SiteListScreen> {
         title: Text('Manajemen Situs Web', style: AppTextStyles.title),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              // sementara kosong, nanti bisa tambahkan logic simpan
+            },
             child: Text(
               'Simpan',
-              style: AppTextStyles.button.copyWith(color: AppColors.primary),
+              style: AppTextStyles.button.copyWith(
+                color: Colors.grey, // disabled
+              ),
             ),
           ),
         ],
-        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Nama kategori
             TextField(
-              controller: _searchController,
-              onChanged: (value) {
-                setState(() {
-                  _searchQuery = value;
-                });
-              },
+              controller: _categoryController,
               decoration: InputDecoration(
-                hintText: 'Masuk kata kunci',
-                prefixIcon: Icon(Icons.search),
+                hintText: 'Nama kategori',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: AppColors.black),
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: AppColors.black.withOpacity(0.3)),
                 ),
               ),
             ),
+            const SizedBox(height: 20),
+
+            // Label Daftar Situs
+            Text(
+              'Daftar Situs',
+              style: AppTextStyles.textReguler,
+            ),
+            const SizedBox(height: 8),
+
+            // Card Tambahkan Situs Web
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: ListTile(
+                title: Text('Tambahkan Situs Web', style: AppTextStyles.textReguler),
+                trailing: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.black, width: 1.5),
+                  ),
+                  padding: const EdgeInsets.all(4),
+                  child: const Icon(Icons.add, size: 20, color: Colors.black),
+                ),
+                onTap: () => _showAddSiteDialog(),
+              ),
+            ),
+
             const SizedBox(height: 16),
-            Expanded(
-              child: filteredSites.isEmpty
-                  ? Center(
-                      child: Text(
-                        'Belum menambahkan situs web',
-                        style: AppTextStyles.description,
-                      ),
-                    )
-                  : ListView.builder(
-                      itemCount: filteredSites.length,
-                      itemBuilder: (context, index) {
-                        return SiteListItem(
-                          siteUrl: filteredSites[index],
-                          onEdit: () =>
-                              _showAddSiteDialog(filteredSites[index]),
-                          onDelete: () => _confirmDelete(filteredSites[index]),
-                        );
-                      },
+
+            // Placeholder jika belum ada data
+            if (_blockedSites.isEmpty)
+              Expanded(
+                child: Center(
+                  child: Text(
+                    'Belum menambahkan situs web',
+                    style: AppTextStyles.description.copyWith(
+                      color: Colors.grey,
                     ),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () => _showAddSiteDialog(),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 14),
+              )
+            else
+              Expanded(
+                child: ListView.builder(
+                  itemCount: _blockedSites.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(_blockedSites[index]),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete, color: AppColors.deleteRed),
+                        onPressed: () {
+                          setState(() {
+                            _blockedSites.removeAt(index);
+                          });
+                        },
+                      ),
+                    );
+                  },
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.add, color: AppColors.white),
-                  const SizedBox(width: 8),
-                  Text('Tambah Situs Web', style: AppTextStyles.textWhite),
-                ],
-              ),
-            ),
           ],
         ),
       ),
@@ -131,36 +141,5 @@ class _SiteListScreenState extends State<SiteListScreen> {
         }
       });
     }
-  }
-
-  void _confirmDelete(String url) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Hapus Situs Web', style: AppTextStyles.title),
-        content: Text(
-          'Yakin ingin menghapus $url ?',
-          style: AppTextStyles.description,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Batal'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _blockedSites.remove(url);
-              });
-              Navigator.pop(context);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.deleteRed,
-            ),
-            child: Text('Oke', style: AppTextStyles.textWhite),
-          ),
-        ],
-      ),
-    );
   }
 }
