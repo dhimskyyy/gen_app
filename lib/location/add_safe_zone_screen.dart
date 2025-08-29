@@ -18,7 +18,6 @@ class _AddSafeZoneScreenState extends State<AddSafeZoneScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          /// Google Maps di background
           GoogleMap(
             initialCameraPosition: CameraPosition(target: _center, zoom: 14.5),
             onMapCreated: (controller) {
@@ -46,7 +45,6 @@ class _AddSafeZoneScreenState extends State<AddSafeZoneScreen> {
             zoomControlsEnabled: false,
           ),
 
-          /// Tombol kembali (overlay di atas peta)
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(12.0),
@@ -75,11 +73,10 @@ class _AddSafeZoneScreenState extends State<AddSafeZoneScreen> {
             ),
           ),
 
-          /// Bottom sheet
           DraggableScrollableSheet(
-            initialChildSize: 0.4, // tinggi awal
-            minChildSize: 0.3, // tinggi minimum saat di-drag ke bawah
-            maxChildSize: 0.5, // maksimum saat di-drag ke atas
+            initialChildSize: 0.4,
+            minChildSize: 0.3,
+            maxChildSize: 0.5,
             builder: (context, scrollController) {
               return Container(
                 decoration: const BoxDecoration(
@@ -99,7 +96,6 @@ class _AddSafeZoneScreenState extends State<AddSafeZoneScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Garis abu-abu
                       Container(
                         width: 40,
                         height: 4,
@@ -119,7 +115,6 @@ class _AddSafeZoneScreenState extends State<AddSafeZoneScreen> {
                       ),
                       const SizedBox(height: 16),
 
-                      // Lokasi
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text("Lokasi"),
@@ -162,7 +157,6 @@ class _AddSafeZoneScreenState extends State<AddSafeZoneScreen> {
                       ),
                       const SizedBox(height: 20),
 
-                      // Slider radius
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [Text("100m"), Text("1000m")],
@@ -182,7 +176,6 @@ class _AddSafeZoneScreenState extends State<AddSafeZoneScreen> {
                       ),
                       const SizedBox(height: 20),
 
-                      // Tombol simpan
                       ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(

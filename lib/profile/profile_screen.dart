@@ -12,7 +12,6 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: AppColors.background,
       body: Stack(
         children: [
-          // Background biru
           Container(
             height: 180,
             decoration: const BoxDecoration(
@@ -23,7 +22,6 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
 
-          // Konten utama
           SafeArea(
             child: Column(
               children: [
@@ -69,7 +67,6 @@ class ProfileScreen extends StatelessWidget {
 
                 const SizedBox(height: 38),
 
-                // Card menu putih
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Container(
@@ -117,9 +114,8 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
 
-          // Foto profil kecil di pojok kanan bawah di atas bottom nav
           Positioned(
-            bottom: 50, // pas di atas bottom nav
+            bottom: 50,
             right: 20,
             child: CircleAvatar(
               radius: 24,
@@ -129,7 +125,7 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: CustomBottomNavBar(
-        currentIndex: 3, // index aktif
+        currentIndex: 3,
         onTap: (index) {
           print("Navigasi ke index: $index");
         },
