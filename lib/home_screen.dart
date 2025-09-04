@@ -2,9 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:gen_app/theme/app_colors.dart';
 import 'package:gen_app/theme/text_styles.dart';
 import 'package:gen_app/bottom_nav.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String userName = 'Pengguna';
+  String? userPhoto;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSelectedUser();
+  }
+
+  // Fungsi untuk membaca data user dari SharedPreferences
+  Future<void> _loadSelectedUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('selectedUserName') ?? 'Pengguna';
+      userPhoto = prefs.getString('selectedUserPhoto');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +44,6 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-
           SafeArea(
             child: SingleChildScrollView(
               child: Padding(
@@ -35,37 +58,41 @@ class HomeScreen extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Foto profil
-                        CircleAvatar(
-                        radius: 20,
-                        backgroundColor: AppColors.white,
-                        child: Icon(Icons.person, color: AppColors.grey),
-                      ),
+                        // Foto profil - gunakan foto user yang dipilih atau default
+                        userPhoto != null
+                            ? CircleAvatar(
+                                radius: 20,
+                                backgroundImage: AssetImage(userPhoto!),
+                              )
+                            : CircleAvatar(
+                                radius: 20,
+                                backgroundColor: AppColors.white,
+                                child: Icon(Icons.person, color: AppColors.grey),
+                              ),
                         const SizedBox(width: 12),
                         Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Halo, Ibu Sarah",
-                              style: AppTextStyles.textWhite.copyWith(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Halo, $userName", // Tampilkan nama yang disimpan
+                                style: AppTextStyles.textWhite.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
-                            ),
-                            Text(
-                              "Selamat Pagi",
-                              style: AppTextStyles.extraSmallWhite.copyWith(
-                                color: const Color.fromRGBO(255, 255, 255, 0.8),
+                              Text(
+                                "Selamat Pagi",
+                                style: AppTextStyles.extraSmallWhite.copyWith(
+                                  color: const Color.fromRGBO(255, 255, 255, 0.8),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
                       ],
                     ),
                     const SizedBox(height: 42),
-
                     // CARD PUTIH
                     Container(
                       padding: const EdgeInsets.all(16),
@@ -107,7 +134,6 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 16),
-
                           // Lokasi
                           Container(
                             padding: const EdgeInsets.all(16),
@@ -196,9 +222,7 @@ class HomeScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-
                           const SizedBox(height: 16),
-
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: const [
@@ -236,9 +260,7 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-
                     const SizedBox(height: 24),
-
                     const Text(
                       "Menu Utama",
                       style: TextStyle(
@@ -248,7 +270,6 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 12),
-
                     GridView.count(
                       crossAxisCount: 2,
                       shrinkWrap: true,
@@ -290,7 +311,6 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 20),
-
                     // Tombol Lihat Laporan Aktivitas
                     Center(
                       child: Container(
@@ -318,9 +338,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     const SizedBox(height: 16),
-
                     // Tombol Upgrade Premium
                     Center(
                       child: Container(
@@ -353,7 +371,6 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     
                   ],
                 ),
@@ -363,7 +380,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: CustomBottomNavBar(
-        currentIndex: 0, // index aktif
+        currentIndex: 0,
         onTap: (index) {
           print("Navigasi ke index: $index");
         },

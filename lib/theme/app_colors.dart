@@ -16,7 +16,7 @@ class AppColors {
   static const Color lightGreen = Color(0xFFEFFBF4);
   static const Color greenSoft = Color(0xFF24DD7D);
   static const Color orangeSoft = Color(0xFFFF8D4F);
-  static const Color greySoft = Color.fromARGB(107, 185, 187, 186);
+  static const Color greySoft = Color(0x2DB9BBBA);
   static const Color yellowSoft = Color(0xFFFFF7E3);
   static const Color redSoft = Color(0xFFFFE4E1);
   static const Color deadLine = Color(0xFFE03616);

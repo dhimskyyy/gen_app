@@ -1,9 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../theme/app_colors.dart';
 import '../theme/text_styles.dart';
 
-class StepIntro extends StatelessWidget {
-  const StepIntro({super.key});
+class LinkedScreen extends StatefulWidget {
+  const LinkedScreen({super.key});
+
+  @override
+  State<LinkedScreen> createState() => _LinkedScreenState();
+}
+
+class _LinkedScreenState extends State<LinkedScreen> {
+  String userName = 'Pengguna';
+  String? userPhoto;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSelectedUser();
+  }
+
+  // Fungsi untuk membaca data user dari SharedPreferences
+  Future<void> _loadSelectedUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('selectedUserName') ?? 'Pengguna';
+      userPhoto = prefs.getString('selectedUserPhoto');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +42,12 @@ class StepIntro extends StatelessWidget {
                 const SizedBox(height: 50),
                 Image.asset('assets/images/mobile.png', height: 220),
                 const SizedBox(height: 40),
+                Text(
+                  'Selamat datang, $userName!', // Tampilkan nama user
+                  style: AppTextStyles.title,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
                 const Text(
                   'Awasi perangkat anak',
                   style: AppTextStyles.title,
@@ -69,7 +99,10 @@ class StepIntro extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // Langsung ke home karena data sudah tersimpan di SharedPreferences
+                    Navigator.pushNamed(context, '/home');
+                  },
                   child: Text(
                     'Tidak Sekarang',
                     style: AppTextStyles.description.copyWith(
