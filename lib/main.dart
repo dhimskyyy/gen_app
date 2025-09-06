@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: AppColors.white,
-        fontFamily: 'YourFont', // opsional
+        fontFamily: 'YourFont',
       ),
       initialRoute: '/',
       routes: {
