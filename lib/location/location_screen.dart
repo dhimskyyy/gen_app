@@ -160,7 +160,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                   myLocationEnabled: false,
                   zoomControlsEnabled: false,
-                  markers: {}, // kosong, karena kita pakai custom overlay marker
+                  markers: {},
                 ),
 
                 /// Custom marker dari asset (Vector.png)
@@ -482,7 +482,7 @@ class __SafeZoneItemState extends State<_SafeZoneItem> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F6FA),
+        color: AppColors.greySoft,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(

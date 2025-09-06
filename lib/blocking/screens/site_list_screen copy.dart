@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
-import '../widgets/section_card.dart';
 import '../widgets/site_list_item.dart';
 import '../widgets/add_site_dialog.dart';
 
