@@ -32,11 +32,7 @@ class _ActionScreenState extends State<ActionScreen> {
         ),
         title: Text(
           "Aksi Cepat",
-          style: AppTextStyles.itemTitle.copyWith(
-            color: AppColors.textDark,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+          style: AppTextStyles.titleAppBar,
         ),
       ),
       body: Padding(
