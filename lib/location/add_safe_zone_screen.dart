@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:gen_app/theme/app_colors.dart';
 
 class AddSafeZoneScreen extends StatefulWidget {
   const AddSafeZoneScreen({super.key});
@@ -177,7 +178,7 @@ class _AddSafeZoneScreenState extends State<AddSafeZoneScreen> {
                       const SizedBox(height: 20),
 
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.pop(context),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                           minimumSize: const Size(double.infinity, 50),
@@ -185,12 +186,12 @@ class _AddSafeZoneScreenState extends State<AddSafeZoneScreen> {
                             borderRadius: BorderRadius.circular(30),
                           ),
                         ),
-                        child: const Text("Simpan"),
+                        child: Text("Simpan",
+                        style: TextStyle(color: AppColors.white)),
                       ),
-                      const SizedBox(height: 10),
                       Center(
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () => Navigator.pop(context),
                           child: const Text(
                             "Batal",
                             style: TextStyle(color: Colors.grey),

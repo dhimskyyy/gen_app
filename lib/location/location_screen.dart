@@ -78,7 +78,7 @@ class _LocationScreenState extends State<LocationScreen> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.greenSoft,
+        backgroundColor: AppColors.greenLight,
         toolbarHeight: 70,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),

@@ -281,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         _MainMenuCard(
                           title: "Lacak Lokasi",
                           iconPath: 'assets/icons/location_icon.png',
-                          backgroundColor: AppColors.greenSoft,
+                          backgroundColor: AppColors.greenLight,
                           textColor: Colors.white,
                           onTap: () =>
                               Navigator.pushNamed(context, '/location'),

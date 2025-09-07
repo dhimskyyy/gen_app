@@ -14,10 +14,13 @@ class AppColors {
   static const Color background = Color(0xFFF5F5F7);
 
   static const Color lightGreen = Color(0xFFEFFBF4);
-  static const Color greenSoft = Color(0xFF24DD7D);
+  static const Color greenSoft = Color(0xFF0F8849);
+  static const Color greenLight = Color(0xFF24DD7D);
+  static const Color blueLight = Color(0xFF88B3E9);
+  static const Color blueeLight = Color(0x2B88B4E9);
   static const Color orangeSoft = Color(0xFFFF8D4F);
   static const Color greySoft = Color(0x2DB9BBBA);
-  static const Color yellowSoft = Color(0xFFFFF7E3);
+  static const Color yellowSoft = Color(0xFFF9DA8E);
   static const Color redSoft = Color(0xFFFFE4E1);
   static const Color deadLine = Color(0xFFE03616);
 

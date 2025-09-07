@@ -56,7 +56,7 @@ class _AppListScreenState extends State<AppListScreen> {
     ),
     AppModel(
       name: 'File Manager',
-      iconPath: 'assets/images/file.png', 
+      iconPath: 'assets/images/file.png',
       isBlocked: false,
     ),
     AppModel(
@@ -128,7 +128,13 @@ class _AppListScreenState extends State<AppListScreen> {
                         app: filteredApps[index],
                         onToggle: (value) {
                           setState(() {
-                            filteredApps[index].isBlocked = value;
+                            if (index == 0) {
+                              for (var app in apps) {
+                                app.isBlocked = value;
+                              }
+                            } else {
+                              filteredApps[index].isBlocked = value;
+                            }
                           });
                         },
                       );

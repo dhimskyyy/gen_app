@@ -57,7 +57,6 @@ class _SafeZoneListState extends State<SafeZoneList> {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         elevation: 0,
-        centerTitle: true,
         title: Text('Zona Aman', style: AppTextStyles.textReguler),
       ),
       body: Stack(
@@ -191,22 +190,22 @@ class _SafeZoneListState extends State<SafeZoneList> {
                 child: ElevatedButton(
                   onPressed: deleteZone,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
+                    backgroundColor: AppColors.deadLine,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: Text('Lanjutkan', style: AppTextStyles.textWhite),
+                  child: Text('Lanjutkan', style: TextStyle(color: AppColors.white)),
                 ),
               ),
-              const SizedBox(height: 12),
+              
               TextButton(
                 onPressed: () {
                   setState(() {
                     isShowDeleteDialog = false;
                   });
                 },
-                child: Text('Batal', style: AppTextStyles.button),
+                child: Text('Batal', style: TextStyle(color: AppColors.grey)),
               ),
             ],
           ),
