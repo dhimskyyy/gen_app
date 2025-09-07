@@ -55,7 +55,7 @@ class BlockingScreen extends StatelessWidget {
                 title: "WhatsApp",
                 iconPath: "assets/images/whatsapp.png",
                 category: "Pesan/Call",
-                initialValue: true,
+                initialValue: false,
               ),
               _addButton(
                 context,
