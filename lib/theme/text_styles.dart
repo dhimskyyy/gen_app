@@ -30,6 +30,12 @@ class AppTextStyles {
     color: AppColors.black,
   );
 
+  static const TextStyle titlee = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: AppColors.black,
+  );
+
   static const TextStyle subtitle = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,

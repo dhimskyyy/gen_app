@@ -203,7 +203,7 @@ Widget _statBox(String value, String label) {
     child: Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
-        color: AppColors.greySoft,
+        color: AppColors.blueLight,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -428,7 +428,7 @@ class _FilterImageToggleItemState extends State<FilterImageToggleItem> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.greySoft,
+        color: AppColors.blueeLight,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(

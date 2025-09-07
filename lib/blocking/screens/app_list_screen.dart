@@ -95,7 +95,7 @@ class _AppListScreenState extends State<AppListScreen> {
           icon: Icon(Icons.arrow_back, color: AppColors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text('Pemblokir Aplikasi', style: AppTextStyles.title),
+        title: Text('Pemblokir Aplikasi', style: AppTextStyles.titlee),
       ),
       body: Column(
         children: [
@@ -117,7 +117,7 @@ class _AppListScreenState extends State<AppListScreen> {
                     child: Text(
                       'Aplikasi tidak ditemukan',
                       style: AppTextStyles.textReguler.copyWith(
-                        color: AppColors.placeholder,
+                        color: AppColors.black,
                       ),
                     ),
                   )

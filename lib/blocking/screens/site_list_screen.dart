@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
 import '../widgets/add_site_dialog.dart';
+import 'package:gen_app/blocking/widgets/delete_site_dialog.dart';
 
 class SiteListScreen extends StatefulWidget {
   const SiteListScreen({super.key});
@@ -11,7 +12,7 @@ class SiteListScreen extends StatefulWidget {
 }
 
 class _SiteListScreenState extends State<SiteListScreen> {
-  final List<String> _blockedSites = [];
+  final List<Map<String, String>> _blockedSites = [];
   final TextEditingController _categoryController = TextEditingController();
 
   @override
@@ -25,12 +26,10 @@ class _SiteListScreenState extends State<SiteListScreen> {
           icon: Icon(Icons.arrow_back, color: AppColors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text('Manajemen Situs Web', style: AppTextStyles.title),
+        title: Text('Manajemen Situs Web', style: AppTextStyles.titlee),
         actions: [
           TextButton(
-            onPressed: () {
-              // sementara kosong, nanti bisa tambahkan logic simpan
-            },
+            onPressed: () {},
             child: Text(
               'Simpan',
               style: AppTextStyles.button.copyWith(
@@ -52,17 +51,16 @@ class _SiteListScreenState extends State<SiteListScreen> {
                 hintText: 'Nama kategori',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: AppColors.black.withOpacity(0.3)),
+                  borderSide: BorderSide(
+                    color: AppColors.black.withOpacity(0.3),
+                  ),
                 ),
               ),
             ),
             const SizedBox(height: 20),
 
             // Label Daftar Situs
-            Text(
-              'Daftar Situs',
-              style: AppTextStyles.textReguler,
-            ),
+            Text('Daftar Situs', style: AppTextStyles.textReguler),
             const SizedBox(height: 8),
 
             // Card Tambahkan Situs Web
@@ -73,7 +71,10 @@ class _SiteListScreenState extends State<SiteListScreen> {
                 border: Border.all(color: Colors.grey.shade300),
               ),
               child: ListTile(
-                title: Text('Tambahkan Situs Web', style: AppTextStyles.textReguler),
+                title: Text(
+                  'Tambahkan Situs Web',
+                  style: AppTextStyles.textReguler,
+                ),
                 trailing: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -105,16 +106,26 @@ class _SiteListScreenState extends State<SiteListScreen> {
                 child: ListView.builder(
                   itemCount: _blockedSites.length,
                   itemBuilder: (context, index) {
+                    final site = _blockedSites[index];
                     return ListTile(
-                      title: Text(_blockedSites[index]),
+                      title: Text(site['url'] ?? ''),
+                      subtitle: Text(site['note'] ?? ''),
                       trailing: IconButton(
-                        icon: Icon(Icons.delete, color: AppColors.deleteRed),
-                        onPressed: () {
-                          setState(() {
-                            _blockedSites.removeAt(index);
-                          });
-                        },
-                      ),
+  icon: Icon(Icons.delete, color: AppColors.deleteRed),
+  onPressed: () async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => DeleteSiteDialog(url: site['url'] ?? ''),
+    );
+
+    if (confirm == true) {
+      setState(() {
+        _blockedSites.removeAt(index);
+      });
+    }
+  },
+),
+
                     );
                   },
                 ),
@@ -125,16 +136,19 @@ class _SiteListScreenState extends State<SiteListScreen> {
     );
   }
 
-  void _showAddSiteDialog([String? currentUrl]) async {
-    final result = await showDialog<String>(
+  void _showAddSiteDialog([Map<String, String>? currentSite]) async {
+    final result = await showDialog<Map<String, String>>(
       context: context,
-      builder: (context) => AddSiteDialog(initialUrl: currentUrl),
+      builder: (context) => AddSiteDialog(
+        initialUrl: currentSite?['url'],
+        initialNote: currentSite?['note'],
+      ),
     );
 
-    if (result != null && result.isNotEmpty) {
+    if (result != null) {
       setState(() {
-        if (currentUrl != null) {
-          int index = _blockedSites.indexOf(currentUrl);
+        if (currentSite != null) {
+          int index = _blockedSites.indexOf(currentSite);
           _blockedSites[index] = result;
         } else {
           _blockedSites.add(result);
