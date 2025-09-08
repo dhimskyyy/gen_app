@@ -1,10 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
 import '../bottom_nav.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String userName = "Pengguna";
+  String userEmail = "email@gmail.com";
+  String? userPhoto;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSelectedUser();
+  }
+
+  Future<void> _loadSelectedUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('selectedUserName') ?? "Pengguna";
+      userEmail = prefs.getString('selectedUserEmail') ?? "email@gmail.com";
+      userPhoto = prefs.getString('selectedUserPhoto');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,25 +55,31 @@ class ProfileScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     children: [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: AppColors.white,
-                        child: Icon(Icons.person, color: AppColors.grey),
-                      ),
+                      // Foto profil
+                      userPhoto != null
+                          ? CircleAvatar(
+                              radius: 20,
+                              backgroundImage: AssetImage(userPhoto!),
+                            )
+                          : CircleAvatar(
+                              radius: 20,
+                              backgroundColor: AppColors.white,
+                              child: Icon(Icons.person, color: AppColors.grey),
+                            ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Sarah Wahyuningsih",
+                              userName,
                               style: AppTextStyles.textWhite.copyWith(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                             Text(
-                              "sarahw@gmail.com",
+                              userEmail,
                               style: AppTextStyles.extraSmallWhite.copyWith(
                                 color: const Color.fromRGBO(255, 255, 255, 0.8),
                               ),
@@ -117,7 +148,7 @@ class ProfileScreen extends StatelessWidget {
           Positioned(
             bottom: 50,
             right: 20,
-            child: CircleAvatar(
+            child: const CircleAvatar(
               radius: 24,
               backgroundImage: AssetImage("assets/images/cs.png"),
             ),
