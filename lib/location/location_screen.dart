@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gen_app/location/widgets/route_history.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/text_styles.dart';
@@ -163,7 +164,6 @@ class _LocationScreenState extends State<LocationScreen> {
                   markers: {},
                 ),
 
-                /// Custom marker dari asset (Vector.png)
                 Center(
                   child: Image.asset(
                     'assets/icons/Vector.png',
@@ -176,16 +176,14 @@ class _LocationScreenState extends State<LocationScreen> {
         ),
         const SizedBox(height: 12),
 
-        /// Tombol buka peta lengkap
         SizedBox(
           width: double.infinity,
           child: ElevatedButton.icon(
             onPressed: () {
-              // Navigasi ke halaman peta lengkap (AddSafeZoneScreen misalnya)
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const AddSafeZoneScreen(),
+                  builder: (context) => const RouteHistory(),
                 ),
               );
             },

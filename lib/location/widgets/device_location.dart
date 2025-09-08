@@ -15,7 +15,6 @@ class DeviceLocation extends StatelessWidget {
           Positioned.fill(
             child: Image.asset('assets/images/maps.png', fit: BoxFit.cover),
           ),
-          // AppBar Kembali & Riwayat Rute
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
